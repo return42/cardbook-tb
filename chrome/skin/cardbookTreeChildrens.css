@@ -1,8 +1,8 @@
 ﻿.cardbookTreeClass {
-	-moz-appearance: none !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    border: 0px !important;
+    border: 0 !important;
+    margin: 0 !important;
     min-width: 150px !important;
     min-height: 150px !important;
 }
@@ -10,27 +10,10 @@
 .cardbookAccountTreeClass treechildren,
 .cardbookAccountTreeClass treechildren::-moz-tree-row(odd),
 .cardbookAccountTreeClass treechildren::-moz-tree-row(even) {
-	-moz-appearance: none !important;
-	background-color: transparent !important;
+	background-color: transparent;
 }
 .cardbookAccountTreeClass treechildren::-moz-tree-row(odd selected),
 .cardbookAccountTreeClass treechildren::-moz-tree-row(even selected) {
-	-moz-appearance: none !important;
-	background-color: Highlight !important;
-	color: Highlighttext !important;
-}
-
-.cardbookCardsTreeClass treechildren,
-.cardbookCardsTreeClass treechildren::-moz-tree-row(NOSEARCH odd),
-.cardbookCardsTreeClass treechildren::-moz-tree-row(NOSEARCH even) {
-	-moz-appearance: none !important;
-	background-color: transparent !important;
-}
-.cardbookCardsTreeClass treechildren::-moz-tree-row(SEARCH odd selected),
-.cardbookCardsTreeClass treechildren::-moz-tree-row(SEARCH even selected),
-.cardbookCardsTreeClass treechildren::-moz-tree-row(NOSEARCH odd selected),
-.cardbookCardsTreeClass treechildren::-moz-tree-row(NOSEARCH even selected) {
-	-moz-appearance: none !important;
 	background-color: Highlight !important;
 	color: Highlighttext !important;
 }

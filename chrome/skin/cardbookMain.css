@@ -1,39 +1,39 @@
-﻿.cardbookBackgroundColorClass caption,
-.cardbookBackgroundColorClass groupbox {
+﻿.cardbookBackgroundColorClass {
 	-moz-appearance: none !important;
-	background-color: white !important;
+	background-color: window !important;
 	border: 0px !important;
 }
 
+.cardbookBackgroundColorClass caption,
+.cardbookBackgroundColorClass groupbox {
+	-moz-appearance: none !important;
+	background-color: transparent !important;
+	border: 0px !important;
+}
+
+.cardbookBackgroundColorClass textbox {
+	-moz-appearance: none !important;
+	border: 1px solid ThreeDShadow !important;
+	min-height:16px !important;
+}
 .cardbookBackgroundColorClass textbox[readonly="true"] {
 	-moz-appearance: none !important;
-	background-color: white !important;
-	border: 0px !important;
 	min-height:16px !important;
+	background-color: transparent !important;
+	border: 0px !important;
 	padding-left: 0px !important;
 }
 .cardbookBackgroundColorClass textbox[link="true"] {
 	-moz-appearance: none !important;
-	background-color: white !important;
+	min-height:16px !important;
+	background-color: transparent !important;
 	border: 0px !important;
 	cursor: pointer !important;
 	color: -moz-hyperlinktext;
 	text-decoration: underline !important;
-	min-height:16px !important;
 }
  .cardbookBackgroundColorClass textbox[link="true"]:hover {
-	-moz-appearance: none !important;
 	color: -moz-activehyperlinktext;
-}
-
-#mainEditionBox,
-#mainHbox {
-	-moz-appearance: none !important;
-	background-color: white !important;
-	border: 0px !important;
-}
-.cardbookBackgroundColorClass textbox {
-	min-height:16px !important;
 }
 
 .cardbookVerticalSplitterClass {
@@ -42,8 +42,9 @@
 	border-left: 0px;
 	border-right: 2px solid ThreeDShadow;
 	border-bottom: 0px;
+	margin-right: -5px;
 	overflow: hidden;
-	background-color: white;
+	background-color: window;
 }
 .cardbookHorizontalSplitterClass {
 	-moz-appearance: none !important;
@@ -51,8 +52,9 @@
 	border-left: 0px;
 	border-right: 0px;
 	border-bottom: 0px;
+	margin-top: -5px;
 	overflow: hidden;
-	background-color: white;
+	background-color: window;
 }
 
 .cardbookPrefClass {

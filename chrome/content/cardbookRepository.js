@@ -114,6 +114,9 @@ var cardbookRepository = {
 	lTimerImportAll : {},
 	lTimerNoSyncModeAll : {},
 	
+	// used to ensure that the initial load is done only once
+	firstLoad : false,
+
 	cardbookDynamicCssRules : {},
 
 	cardbookUncategorizedCards : "",
@@ -657,9 +660,6 @@ var cardbookRepository = {
 				if (myFile.exists() && myFile.isFile()) {
 					myFile.remove(true);
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " deleted from directory");
-					if (cardbookRepository.cardbookFileCacheCards[aCard.dirPrefId][aCard.cacheuri]) {
-						delete cardbookRepository.cardbookFileCacheCards[aCard.dirPrefId][aCard.cacheuri];
-					}
 				}
 			} else if (myDirPrefIdType === "FILE" || myDirPrefIdType === "SEARCH") {
 				return;

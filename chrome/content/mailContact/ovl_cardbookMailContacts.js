@@ -182,6 +182,7 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 					mail3PaneWindow.focus();
 				}
 			}
+			// gloda is not defined when used from an independant window
 			Components.utils.import("resource:///modules/gloda/msg_search.js");
 			tabmail.openTab("glodaFacet", {searcher: new GlodaMsgSearcher(null, '"' + listOfEmail.join('" "') + '"', false)});
 		},

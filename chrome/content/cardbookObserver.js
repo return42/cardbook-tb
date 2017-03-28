@@ -118,12 +118,10 @@ if ("undefined" == typeof(cardbookObserver)) {
 				case "cardbook.DBOpen":
 					cardbookSynchronization.loadAccounts();
 					if (wdw_cardbook) {
-						wdw_cardbook.loadCssRules();
-						wdw_cardbook.refreshWindow("accountid:0");
+						wdw_cardbook.loadFirstWindow();
 					}
 					break;
 			}
 		}
 	};
-
 };

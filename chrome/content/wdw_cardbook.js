@@ -56,7 +56,7 @@ if ("undefined" == typeof(wdw_cardbook)) {
 			document.getElementById('dispadr').setAttribute('hidden', 'true');
 			document.getElementById('disptel').setAttribute('hidden', 'true');
 			document.getElementById('dispemail').setAttribute('hidden', 'true');
-			prefs.setBoolPref("extensions.cardbook.firstOpenModern", true);
+			prefs.setBoolPref("extensions.cardbook.firstOpenModern", false);
 		}
 		wdw_cardbook.showCorrectTabs();
 		wdw_cardbook.setElementLabelWithBundle('cardbookToolbarEditButton', "cardbookToolbarEditButtonLabel");
@@ -93,6 +93,9 @@ if ("undefined" == typeof(wdw_cardbook)) {
 		wdw_cardbook.clearCard();
 		wdw_cardbook.clearAccountOrCat();
 		wdw_cardbook.firstOpen();
+		// in case of opening a new window without having a reload
+		wdw_cardbook.loadCssRules();
+		wdw_cardbook.refreshWindow("accountid:0");
 	},
 
 		syncAccounts: function () {
@@ -1163,7 +1166,7 @@ if ("undefined" == typeof(wdw_cardbook)) {
 				}
 			}
 			if (cardbookRepository.cardbookDisplayCards[mySelectedAccount]) {
-				cardbookRepository.cardbookDisplayCards[mySelectedAccount] = cardbookUtils.sortArrayByString(cardbookRepository.cardbookDisplayCards[mySelectedAccount],columnName, order);
+				cardbookRepository.cardbookDisplayCards[mySelectedAccount] = cardbookUtils.sortArrayByString(cardbookRepository.cardbookDisplayCards[mySelectedAccount], columnName, order);
 			} else {
 				return;
 			}

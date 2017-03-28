@@ -411,20 +411,22 @@ if ("undefined" == typeof(cardbookTypes)) {
 					} else {
 						currentRow = cardbookTypes.addRow(aOrigBox, 'orgRow_' + i);
 						cardbookTypes.addLabel(currentRow, 'orgLabel_' + i, myOrgStructure[i], 'orgTextBox_' + i, {class: 'header'});
-						cardbookElementTools.addTextbox(currentRow, 'orgTextBox_' + i, myValue, {flex: '1'});
+						var myTextBox = cardbookElementTools.addTextbox(currentRow, 'orgTextBox_' + i, myValue, {flex: '1'});
+						myTextBox.addEventListener("input", wdw_cardEdition.setDisplayName, false);
 					}
 				}
 			} else {
 				if (aReadOnly) {
 					if (aOrgValue != "") {
-						currentRow = cardbookTypes.addRow(aOrigBox, 'orgRow');
-						cardbookTypes.addLabel(currentRow, 'orgLabel', strBundle.getString("orgLabel"), 'orgTextBox', {class: 'header'});
-						cardbookElementTools.addTextbox(currentRow, 'orgTextBox', aOrgValue, {flex: '1', readonly: 'true'});
+						currentRow = cardbookTypes.addRow(aOrigBox, 'orgRow_0');
+						cardbookTypes.addLabel(currentRow, 'orgLabel', strBundle.getString("orgLabel"), 'orgTextBox_0', {class: 'header'});
+						cardbookElementTools.addTextbox(currentRow, 'orgTextBox_0', aOrgValue, {flex: '1', readonly: 'true'});
 					}
 				} else {
-					currentRow = cardbookTypes.addRow(aOrigBox, 'orgRow');
-					cardbookTypes.addLabel(currentRow, 'orgLabel', strBundle.getString("orgLabel"), 'orgTextBox', {class: 'header'});
-					cardbookElementTools.addTextbox(currentRow, 'orgTextBox', aOrgValue, {flex: '1'});
+					currentRow = cardbookTypes.addRow(aOrigBox, 'orgRow_0');
+					cardbookTypes.addLabel(currentRow, 'orgLabel', strBundle.getString("orgLabel"), 'orgTextBox_0', {class: 'header'});
+					var myTextBox = cardbookElementTools.addTextbox(currentRow, 'orgTextBox_0', aOrgValue, {flex: '1'});
+					myTextBox.addEventListener("input", wdw_cardEdition.setDisplayName, false);
 				}
 			}
 			if (aReadOnly) {

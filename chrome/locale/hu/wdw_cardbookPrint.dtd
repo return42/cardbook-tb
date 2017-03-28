@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Nyomtatási beállítások">
 <!ENTITY titleLabel "Cím:">
 <!ENTITY titleAccesskey "C">
-<!ENTITY whatToPrintGroupboxLabel "Helyszíni beállítások">
 <!ENTITY displayHeadersLabel "Címek megjelenítése">
 <!ENTITY displayHeadersAccesskey "C">
+<!ENTITY displayFieldNamesLabel "??Field names??">
+<!ENTITY displayFieldNamesAccesskey "F">
+<!ENTITY displayTypesLabel "??Types and Preferences??">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "Helyszíni beállítások">
 <!ENTITY displayLabel "Megjelenítendő név">
 <!ENTITY displayAccesskey "M">
 <!ENTITY personalLabel "Személyes adat">

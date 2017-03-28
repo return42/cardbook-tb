@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Impostazioni di stampa">
 <!ENTITY titleLabel "Titolo:">
 <!ENTITY titleAccesskey "T">
-<!ENTITY whatToPrintGroupboxLabel "Cosa stampare">
 <!ENTITY displayHeadersLabel "Mostra le intestazioni di paragrafo">
 <!ENTITY displayHeadersAccesskey "i">
+<!ENTITY displayFieldNamesLabel "??Field names??">
+<!ENTITY displayFieldNamesAccesskey "F">
+<!ENTITY displayTypesLabel "??Types and Preferences??">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "Cosa stampare">
 <!ENTITY displayLabel "Mostra nome">
 <!ENTITY displayAccesskey "M">
 <!ENTITY personalLabel "Informazioni personali">

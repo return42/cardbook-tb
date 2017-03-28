@@ -12,7 +12,8 @@
 	persist="screenX screenY width height"
 	style="min-width:400px;min-height:200px;">
 	
-	<script src="chrome://cardbook/content/cardbookElementTools.js"/>
+	<script src="cardbookUtils.js"/>
+	<script src="cardbookElementTools.js"/>
 	<script src="wdw_cardbookConfigurationSearchCard.js"/>
 
 	<keyset id="wdw_cardbookConfigurationSearchCard-keys">

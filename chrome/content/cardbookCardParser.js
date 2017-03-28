@@ -433,7 +433,7 @@ cardbookCardParser.prototype = {
 				}
 				
 				if (this.fn == "") {
-					this.fn = cardbookUtils.getDisplayedName(this.fn, this.fn, [this.prefixname, this.firstname, this.othername, this.lastname, this.suffixname], [this.prefixname, this.firstname, this.othername, this.lastname, this.suffixname], this.org, this.org);
+					this.fn = cardbookUtils.getDisplayedName([this.prefixname, this.firstname, this.othername, this.lastname, this.suffixname], this.org);
 				}
 				
 				cardbookUtils.addEtag(this, vEtag);

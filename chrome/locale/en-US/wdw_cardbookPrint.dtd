@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Print Settings">
 <!ENTITY titleLabel "Title:">
 <!ENTITY titleAccesskey "T">
-<!ENTITY whatToPrintGroupboxLabel "What to Print">
 <!ENTITY displayHeadersLabel "Display Paragraph Headers">
 <!ENTITY displayHeadersAccesskey "H">
+<!ENTITY displayFieldNamesLabel "Field names">
+<!ENTITY displayFieldNamesAccesskey "F">
+<!ENTITY displayTypesLabel "Types and Preferences">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "What to Print">
 <!ENTITY displayLabel "Display Name">
 <!ENTITY displayAccesskey "D">
 <!ENTITY personalLabel "Personal Information">

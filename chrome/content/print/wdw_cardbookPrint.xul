@@ -56,6 +56,11 @@
 				<separator class="thin"/>
 				<checkbox id="displayHeadersCheckBox" label="&displayHeadersLabel;" accesskey="&displayHeadersAccesskey;" checked="true" persist="checked"
 					oncommand="wdw_cardbookPrint.refreshHTML();"/>
+				<checkbox id="displayFieldNamesCheckBox" label="&displayFieldNamesLabel;" accesskey="&displayFieldNamesAccesskey;" checked="true" persist="checked"
+					oncommand="wdw_cardbookPrint.refreshHTML();"/>
+				<checkbox id="displayTypesCheckBox" label="&displayTypesLabel;" accesskey="&displayTypesAccesskey;" checked="true" persist="checked"
+					oncommand="wdw_cardbookPrint.refreshHTML();"/>
+				<separator class="thin"/>
 			</groupbox>
 	
 			<groupbox>

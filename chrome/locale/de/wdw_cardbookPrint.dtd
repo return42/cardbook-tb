@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Druckeinstellungen">
 <!ENTITY titleLabel "Titel:">
 <!ENTITY titleAccesskey "T">
-<!ENTITY whatToPrintGroupboxLabel "Druckauswahl">
 <!ENTITY displayHeadersLabel "Überschriften anzeigen">
-<!ENTITY displayHeadersAccesskey "H">
+<!ENTITY displayHeadersAccesskey "s">
+<!ENTITY displayFieldNamesLabel "Feldnamen anzeigen">
+<!ENTITY displayFieldNamesAccesskey "F">
+<!ENTITY displayTypesLabel "Typen und Präferenzen anzeigen">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "Druckauswahl">
 <!ENTITY displayLabel "Anzeigename">
 <!ENTITY displayAccesskey "A">
 <!ENTITY personalLabel "Persönliche Informationen">

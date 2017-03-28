@@ -59,6 +59,8 @@
 				name="extensions.cardbook.cardCreationVersion" type="string"/>
 			<preference id="extensions.cardbook.localizeEngine"
 				name="extensions.cardbook.localizeEngine" type="string"/>
+			<preference id="extensions.cardbook.fnFormula"
+				name="extensions.cardbook.fnFormula" type="string"/>
 			<preference id="extensions.cardbook.localizeTarget"
 				name="extensions.cardbook.localizeTarget" type="string"/>
 			<preference id="extensions.cardbook.preferenceLabel"
@@ -218,6 +220,41 @@
 								<radio value="BingMaps" label="&localizeEngineBingMapsLabel;" accesskey="&localizeEngineBingMapsAccesskey;"/>
 							</radiogroup>
 						</hbox>
+					</groupbox>
+
+					<groupbox>
+						<caption label="&fnLabel;"/>
+						<description style="width:400px">&fnLabelExplanation;</description>
+						<grid align="center" flex="1">
+							<columns>
+								<column/>
+								<column flex="1"/>
+								<column/>
+							</columns>
+				
+							<rows>
+								<row align="center">
+									<label value="&fnFormulaLabel;"
+										accesskey="&fnFormulaAccesskey;"
+										control="fnFormulaTextBox"
+										id="fnFormula"/>
+									<textbox id="fnFormulaTextBox"
+										preference="extensions.cardbook.fnFormula"/>
+									<button id="resetFnFormulaButton" label="&resetfnFormulaLabel;" accesskey="&resetFnFormulaAccesskey;" 
+										oncommand="wdw_cardbookConfiguration.resetFnFormula();"/>
+								</row>
+								<row align="center">
+									<label value=""/>
+									<label id="fnFormulaDescriptionLabel1"/>
+									<label value=""/>
+								</row>
+								<row align="center">
+									<label value=""/>
+									<label id="fnFormulaDescriptionLabel2"/>
+									<label value=""/>
+								</row>
+							</rows>
+						</grid>
 					</groupbox>
 
 					<groupbox>

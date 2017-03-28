@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Afdrukinstellingen">
 <!ENTITY titleLabel "Titel:">
 <!ENTITY titleAccesskey "T">
-<!ENTITY whatToPrintGroupboxLabel "Af te drukken">
 <!ENTITY displayHeadersLabel "Toon paragraafhoofden">
-<!ENTITY displayHeadersAccesskey "H">
+<!ENTITY displayHeadersAccesskey "h">
+<!ENTITY displayFieldNamesLabel "Toon rubriek-namen">
+<!ENTITY displayFieldNamesAccesskey "r">
+<!ENTITY displayTypesLabel "Toon types en voorkeuren">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "Af te drukken">
 <!ENTITY displayLabel "Getoonde naam">
 <!ENTITY displayAccesskey "G">
 <!ENTITY personalLabel "Persoonlijke informatie">

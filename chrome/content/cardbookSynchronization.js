@@ -2380,9 +2380,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 								myCard.version = cardbookPrefService.getVCard();
 								cardbookUtils.setCardUUID(myCard);
 								cardbookUtils.setCalculatedFields(myCard);
-								myCard.fn = cardbookUtils.getDisplayedName("", myCard.fn, 
-																	[], [myCard.prefixname, myCard.firstname, myCard.othername, myCard.lastname, myCard.suffixname],
-																			"", myCard.org);
+								myCard.fn = cardbookUtils.getDisplayedName(myCard.fn, [myCard.prefixname, myCard.firstname, myCard.othername, myCard.lastname, myCard.suffixname], myCard.org);
 							}
 							catch (e) {
 								cardbookRepository.cardbookServerSyncError[aParams.aPrefId]++;

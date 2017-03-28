@@ -54,6 +54,12 @@
 <!ENTITY localizeTargetInAccesskey "D">
 <!ENTITY localizeTargetOutLabel "Fora do Thunderbird">
 <!ENTITY localizeTargetOutAccesskey "F">
+<!ENTITY fnLabelExplanation "??It is possible to customize the way CardBook generates its Displayed Name. This formula consists in blocks enclosed by '()'. In these blocks, there are two parts delimited by '|'. 
+								The first part applies when the term involved, for example {{1}}, is not null, the second part applies when the term involved is null.??">
+<!ENTITY fnFormulaLabel "??Generate Displayed Name??">
+<!ENTITY fnFormulaAccesskey "P">
+<!ENTITY resetfnFormulaLabel "??Reset to Default??">
+<!ENTITY resetFnFormulaAccesskey "R">
 <!ENTITY miscEdittingGroupboxLabel "Diversos">
 <!ENTITY cardCreationVersionLabel "Versão do vCard por omissão:">
 <!ENTITY preferEmailEditionLabel "Duplo clique no contacto para edita-lo em vez de enviar email">

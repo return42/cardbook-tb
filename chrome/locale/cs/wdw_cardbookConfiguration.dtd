@@ -54,6 +54,12 @@
 <!ENTITY localizeTargetInAccesskey "V">
 <!ENTITY localizeTargetOutLabel "mimo Thunderbird">
 <!ENTITY localizeTargetOutAccesskey "M">
+<!ENTITY fnLabelExplanation "Je možné si přizpůsobit, jak CardBook vytváří zobrazované jméno. Tento vzorec se skládá z bloků uzavřených v '()'. V těchto blocích jsou dvě části oddělené '|'. 
+				První část se použije, když je zmíněný termín, například {{1}} nenulový, druhá se použije, když je zmíněný termín nulový.">
+<!ENTITY fnFormulaLabel "Vytvořit zobrazované jméno">
+<!ENTITY fnFormulaAccesskey "z">
+<!ENTITY resetfnFormulaLabel "Obnovit na výchozí hodnotu">
+<!ENTITY resetFnFormulaAccesskey "h">
 <!ENTITY miscEdittingGroupboxLabel "Ost.">
 <!ENTITY cardCreationVersionLabel "Výchozí verze vCard:">
 <!ENTITY preferEmailEditionLabel "Dvojklik na kontakt ho upraví namísto odeslání e-mailu">

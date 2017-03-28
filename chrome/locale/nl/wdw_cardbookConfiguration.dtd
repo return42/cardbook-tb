@@ -54,6 +54,12 @@
 <!ENTITY localizeTargetInAccesskey "I">
 <!ENTITY localizeTargetOutLabel "Buiten Thunderbird">
 <!ENTITY localizeTargetOutAccesskey "U">
+<!ENTITY fnLabelExplanation "Het is mogelijk om in te stellen hoe CardBook de 'Getoonde naam' samenstelt. De formule bestaat uit blokken, omsloten door haakjes, (). In die blokken zitten twee delen, gescheiden door een verticaal streepje, |.
+					Het eerste deel is van toepassing als het betreffende deel {{1}} ingevuld is, het tweede deel als het niet ingevuld is.">
+<!ENTITY fnFormulaLabel "'Getoonde naam' samenstellen">
+<!ENTITY fnFormulaAccesskey "s">
+<!ENTITY resetfnFormulaLabel "Herstellen naar standaardwaarde">
+<!ENTITY resetFnFormulaAccesskey "H">
 <!ENTITY miscEdittingGroupboxLabel "Overig">
 <!ENTITY cardCreationVersionLabel "Default vCard versie:">
 <!ENTITY preferEmailEditionLabel "Dubbelklikken op contactpersoon start wijzigen (i.p.v. bericht verzenden)">

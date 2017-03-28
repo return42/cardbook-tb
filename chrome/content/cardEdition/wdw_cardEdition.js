@@ -556,18 +556,53 @@ if ("undefined" == typeof(wdw_cardEdition)) {
 			wdw_cardEdition.loadCategories([]);
 		},
 
+		getOrg: function () {
+			var myOrg = [];
+			var result = "";
+			var aListRows = document.getElementById('orgRows');
+			var i = 0;
+			while (true) {
+				if (document.getElementById('orgRow_' + i)) {
+					myOrg.push(document.getElementById('orgTextBox_' + i).value.trim());
+					i++;
+				} else {
+					break;
+				}
+			}
+			result = cardbookUtils.escapeArrays2(myOrg).join(";");
+			result = result.replace(/;*$/g, "");
+			if (result.replace(/^;*$/, "") == "") {
+				return "";
+			} else {
+				return result;
+			}
+		},
+
 		setDisplayName: function () {
-			document.getElementById('fnTextBox').value = cardbookUtils.getDisplayedName(wdw_cardEdition.workingCard.fn, document.getElementById('fnTextBox').value.trim(),
-												[wdw_cardEdition.workingCard.prefixname, wdw_cardEdition.workingCard.firstname, wdw_cardEdition.workingCard.othername, wdw_cardEdition.workingCard.lastname, wdw_cardEdition.workingCard.suffixname],
-												[document.getElementById('prefixnameTextBox').value.trim(), document.getElementById('firstnameTextBox').value.trim(), document.getElementById('othernameTextBox').value.trim(),
-													document.getElementById('lastnameTextBox').value.trim(), document.getElementById('suffixnameTextBox').value.trim()],
-												"", wdw_cardEdition.workingCard.org).trim();
+			var myOldFn = cardbookUtils.getDisplayedName([wdw_cardEdition.workingCard.prefixname,
+															wdw_cardEdition.workingCard.firstname,
+															wdw_cardEdition.workingCard.othername,
+															wdw_cardEdition.workingCard.lastname,
+															wdw_cardEdition.workingCard.suffixname],
+															wdw_cardEdition.workingCard.org);
+			var myNewOrg = wdw_cardEdition.getOrg();
+			var myCurrentFn = document.getElementById('fnTextBox').value.trim();
+			if (myCurrentFn == myOldFn || myCurrentFn == "") {
+				var myNewFn = cardbookUtils.getDisplayedName([document.getElementById('prefixnameTextBox').value.trim(),
+																document.getElementById('firstnameTextBox').value.trim(),
+																document.getElementById('othernameTextBox').value.trim(),
+																document.getElementById('lastnameTextBox').value.trim(),
+																document.getElementById('suffixnameTextBox').value.trim()],
+																myNewOrg);
+				document.getElementById('fnTextBox').value = myNewFn;
+			}
 			wdw_cardEdition.workingCard.lastname = document.getElementById('lastnameTextBox').value.trim();
 			wdw_cardEdition.workingCard.firstname = document.getElementById('firstnameTextBox').value.trim();
 			wdw_cardEdition.workingCard.othername = document.getElementById('othernameTextBox').value.trim();
 			wdw_cardEdition.workingCard.suffixname = document.getElementById('suffixnameTextBox').value.trim();
 			wdw_cardEdition.workingCard.prefixname = document.getElementById('prefixnameTextBox').value.trim();
-			wdw_cardEdition.workingCard.fn = document.getElementById('fnTextBox').value.trim();
+			wdw_cardEdition.workingCard.org = myNewOrg;
+			wdw_cardEdition.workingCard.fn = myNewFn;
 		},
 
 		loadRichContext: function(aEvent)
@@ -697,34 +732,11 @@ if ("undefined" == typeof(wdw_cardEdition)) {
 			aCard.version = document.getElementById("versionTextBox").value;
 			aCard.categories = wdw_cardEdition.getCategories();
 			
-			var myOrg = [];
-			var aListRows = document.getElementById('orgRows');
-			var i = 0;
-			while (true) {
-				if (document.getElementById('orgRow_' + i)) {
-					myOrg.push(document.getElementById('orgTextBox_' + i).value.trim());
-					i++;
-				} else {
-					break;
-				}
-			}
-			if (myOrg.length === 0) {
-				aCard.org = document.getElementById('orgTextBox').value.trim();
-			} else {
-				aCard.org = cardbookUtils.escapeArrays2(myOrg).join(";");
-				aCard.org = aCard.org.replace(/;*$/g, "");
-				if (aCard.org.replace(/^;*$/, "") == "") {
-					aCard.org = "";
-				}
-			}
+			aCard.org = wdw_cardEdition.getOrg();
 			aCard.title = document.getElementById('titleTextBox').value.trim();
 			aCard.role = document.getElementById('roleTextBox').value.trim();
 
-			aCard.fn = cardbookUtils.getDisplayedName(aCard.fn, document.getElementById('fnTextBox').value.trim(),
-												[aCard.prefixname, aCard.firstname, aCard.othername, aCard.lastname, aCard.suffixname],
-												[document.getElementById('prefixnameTextBox').value.trim(), document.getElementById('firstnameTextBox').value.trim(), document.getElementById('othernameTextBox').value.trim(),
-													document.getElementById('lastnameTextBox').value.trim(), document.getElementById('suffixnameTextBox').value.trim()],
-												"", aCard.org);
+			aCard.fn = document.getElementById('fnTextBox').value.trim();
 			aCard.lastname = document.getElementById('lastnameTextBox').value.trim();
 			aCard.firstname = document.getElementById('firstnameTextBox').value.trim();
 			aCard.othername = document.getElementById('othernameTextBox').value.trim();

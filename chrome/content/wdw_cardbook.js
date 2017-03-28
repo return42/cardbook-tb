@@ -965,11 +965,13 @@ if ("undefined" == typeof(wdw_cardbook)) {
 		},
 
 		emailCardsFromAccountsOrCats: function (aAction) {
+			var listOfSelectedCard = [];
 			listOfSelectedCard = cardbookUtils.getCardsFromAccountsOrCats();
 			wdw_cardbook.emailCards(listOfSelectedCard, null, aAction);
 		},
 
 		emailCardsFromCards: function (aAction) {
+			var listOfSelectedCard = [];
 			listOfSelectedCard = cardbookUtils.getCardsFromCards();
 			wdw_cardbook.emailCards(listOfSelectedCard, null, aAction);
 		},
@@ -1419,7 +1421,7 @@ if ("undefined" == typeof(wdw_cardbook)) {
 				var statusFeedback = Components.classes["@mozilla.org/messenger/statusfeedback;1"].createInstance();
 				statusFeedback = statusFeedback.QueryInterface(Components.interfaces.nsIMsgStatusFeedback);
 				var myArgs = {listOfCards: aListOfCards, title: aTitle, feedback: statusFeedback, doPrintPreview: true};
-				printEngineWindow = window.openDialog("chrome://cardbook/content/print/wdw_cardbookPrint.xul", "", "chrome,dialog=no,all", myArgs);
+				var printEngineWindow = window.openDialog("chrome://cardbook/content/print/wdw_cardbookPrint.xul", "", "chrome,dialog=no,all", myArgs);
 			}
 		},
 
@@ -1672,13 +1674,13 @@ if ("undefined" == typeof(wdw_cardbook)) {
 						if (myTree.currentIndex != -1) {
 							var myParentIndex = myTree.view.getParentIndex(myTree.currentIndex);
 							if (myParentIndex == -1) {
-								myParentAccountId = myTree.view.getCellText(myTree.currentIndex, {id: "accountId"});
-								myParentAccountName = myTree.view.getCellText(myTree.currentIndex, {id: "accountName"});
-								myParentAccountType = myTree.view.getCellText(myTree.currentIndex, {id: "accountType"});
+								var myParentAccountId = myTree.view.getCellText(myTree.currentIndex, {id: "accountId"});
+								var myParentAccountName = myTree.view.getCellText(myTree.currentIndex, {id: "accountName"});
+								var myParentAccountType = myTree.view.getCellText(myTree.currentIndex, {id: "accountType"});
 							} else {
-								myParentAccountId = myTree.view.getCellText(myParentIndex, {id: "accountId"});
-								myParentAccountName = myTree.view.getCellText(myParentIndex, {id: "accountName"});
-								myParentAccountType = myTree.view.getCellText(myParentIndex, {id: "accountType"});
+								var myParentAccountId = myTree.view.getCellText(myParentIndex, {id: "accountId"});
+								var myParentAccountName = myTree.view.getCellText(myParentIndex, {id: "accountName"});
+								var myParentAccountType = myTree.view.getCellText(myParentIndex, {id: "accountType"});
 							}
 			
 							var cardbookPrefService = new cardbookPreferenceService(myParentAccountId);

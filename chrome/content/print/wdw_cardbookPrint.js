@@ -8,6 +8,8 @@ if ("undefined" == typeof(wdw_cardbookPrint)) {
             var myHTML = cardbookPrint.buildHTML(window.arguments[0].listOfCards, document.getElementById("titleTextBox").value, 
 																		{ display: document.getElementById("displayCheckBox").checked,
 																			headers: document.getElementById("displayHeadersCheckBox").checked,
+																			fieldNames: document.getElementById("displayFieldNamesCheckBox").checked,
+																			types: document.getElementById("displayTypesCheckBox").checked,
 																			personal: document.getElementById("personalCheckBox").checked,
 																			org: document.getElementById("orgCheckBox").checked,
 																			categories: document.getElementById("categoriesCheckBox").checked,
@@ -45,7 +47,7 @@ if ("undefined" == typeof(wdw_cardbookPrint)) {
 		printSettings: null,
 
 		loadCheckboxes: function() {
-			var myFields = [ "adr", "categories", "display", "displayHeaders", "email", "impp", "note", "org", "personal", "tel", "url" ];
+			var myFields = [ "adr", "categories", "display", "displayHeaders", "displayFieldNames", "displayTypes", "email", "impp", "note", "org", "personal", "tel", "url" ];
 			for (var i = 0; i < myFields.length; i++) {
 				var myCheckbox = document.getElementById(myFields[i] + "CheckBox");
 				if (myCheckbox.getAttribute("checked") == "true") {

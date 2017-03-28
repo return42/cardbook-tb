@@ -73,7 +73,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 						if (aListOfCards[i][myField] != "") {
 							if (aColumnChoice.headers) {
 								cardbookPrint.openTag("tr", '', "");
-								cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								if (aColumnChoice.fieldNames) {
+									cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								} else {
+									cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', "");
+								}
 								cardbookPrint.closeTag("td", false);
 								cardbookPrint.closeTag("tr", true);
 								cardbookPrint.openTag("tr", '', "");
@@ -88,7 +92,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 								cardbookPrint.closeTag("tr", true);
 							} else {
 								cardbookPrint.openTag("tr", '', "");
-								cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								if (aColumnChoice.fieldNames) {
+									cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								} else {
+									cardbookPrint.openTag("td", 'class="titlevalue"', "");
+								}
 								cardbookPrint.closeTag("td", false);
 								cardbookPrint.openTag("td", '', "");
 								cardbookPrint.closeTag("td", false);
@@ -104,7 +112,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 						if (aListOfCards[i][myField] != "") {
 							if (aColumnChoice.headers) {
 								cardbookPrint.openTag("tr", '', "");
-								cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								if (aColumnChoice.fieldNames) {
+									cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								} else {
+									cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', "");
+								}
 								cardbookPrint.closeTag("td", false);
 								cardbookPrint.closeTag("tr", true);
 								cardbookPrint.openTag("tr", '', "");
@@ -119,7 +131,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 								cardbookPrint.closeTag("tr", true);
 							} else {
 								cardbookPrint.openTag("tr", '', "");
-								cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								if (aColumnChoice.fieldNames) {
+									cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+								} else {
+									cardbookPrint.openTag("td", 'class="titlevalue"', "");
+								}
 								cardbookPrint.closeTag("td", false);
 								cardbookPrint.openTag("td", '', "");
 								cardbookPrint.closeTag("td", false);
@@ -139,7 +155,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 									if (aColumnChoice.headers) {
 										if (!found) {
 											cardbookPrint.openTag("tr", '', "");
-											cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+											if (aColumnChoice.fieldNames) {
+												cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(j + 'GroupboxLabel'));
+											} else {
+												cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', "");
+											}
 											cardbookPrint.closeTag("td", false);
 											cardbookPrint.closeTag("tr", true);
 											found = true;
@@ -147,13 +167,21 @@ if ("undefined" == typeof(cardbookPrint)) {
 										cardbookPrint.openTag("tr", '', "");
 										cardbookPrint.openTag("td", 'class="dummyvalue"', "");
 										cardbookPrint.closeTag("td", false);
-										cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + "Label"));
+										if (aColumnChoice.fieldNames) {
+											cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + "Label"));
+										} else {
+											cardbookPrint.openTag("td", 'class="titlevalue"', "");
+										}
 										cardbookPrint.closeTag("td", false);
 										cardbookPrint.openTag("td", '', "");
 										cardbookPrint.closeTag("td", false);
 									} else {
 										cardbookPrint.openTag("tr", '', "");
-										cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + "Label"));
+										if (aColumnChoice.fieldNames) {
+											cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + "Label"));
+										} else {
+											cardbookPrint.openTag("td", 'class="titlevalue"', "");
+										}
 										cardbookPrint.closeTag("td", false);
 										cardbookPrint.openTag("td", '', "");
 										cardbookPrint.closeTag("td", false);
@@ -176,7 +204,11 @@ if ("undefined" == typeof(cardbookPrint)) {
 										if (aColumnChoice.headers) {
 											if (!found) {
 												cardbookPrint.openTag("tr", '', "");
-												cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(myField + 'GroupboxLabel'));
+												if (aColumnChoice.fieldNames) {
+													cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', strBundle.getString(myField + 'GroupboxLabel'));
+												} else {
+													cardbookPrint.openTag("td", 'colspan="8" class="titlevalue"', "");
+												}
 												cardbookPrint.closeTag("td", false);
 												cardbookPrint.closeTag("tr", true);
 												found = true;
@@ -184,17 +216,25 @@ if ("undefined" == typeof(cardbookPrint)) {
 											cardbookPrint.openTag("td", 'class="dummyvalue"', "");
 											cardbookPrint.closeTag("td", false);
 										} else {
-											cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + 'Label'));
+											if (aColumnChoice.fieldNames) {
+												cardbookPrint.openTag("td", 'class="titlevalue"', strBundle.getString(myField + 'Label'));
+											} else {
+												cardbookPrint.openTag("td", 'class="titlevalue"', "");
+											}
 											cardbookPrint.closeTag("td", false);
 										}
-										if (cardbookUtils.getPrefBooleanFromTypes(aListOfCards[i][myField][m][1])) {
+										if (cardbookUtils.getPrefBooleanFromTypes(aListOfCards[i][myField][m][1]) && aColumnChoice.types) {
 											var myCheck = "✓";
 										} else {
 											var myCheck = "";
 										}
 										cardbookPrint.openTag("td", 'class="typevalue"', myCheck);
 										cardbookPrint.closeTag("td", false);
-										cardbookPrint.openTag("td", 'class="typevalue"', cardbookPrint.getTypes(myField, aListOfCards[i][myField][m][1], aListOfCards[i][myField][m][3], aListOfCards[i][myField][m][0][0]).join(" "));
+										if (aColumnChoice.types) {
+											cardbookPrint.openTag("td", 'class="typevalue"', cardbookPrint.getTypes(myField, aListOfCards[i][myField][m][1], aListOfCards[i][myField][m][3], aListOfCards[i][myField][m][0][0]).join(" "));
+										} else {
+											cardbookPrint.openTag("td", 'class="typevalue"', "");
+										}
 										cardbookPrint.closeTag("td", false);
 										if (myField == "adr") {
 											cardbookPrint.openTag("td", 'class="datavalue"', cardbookUtils.formatAddress(aListOfCards[i][myField][m][0]));

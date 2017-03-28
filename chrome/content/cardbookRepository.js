@@ -21,6 +21,8 @@ var cardbookRepository = {
 
 	dateFormats : ["YYYY-MM-DD", "YYYY.MM.DD", "YYYY/MM/DD", "YYYYMMDD", "DD-MM-YYYY", "DD.MM.YYYY", "DD/MM/YYYY", "DDMMYYYY", "MM-DD-YYYY", "MM.DD.YYYY", "MM/DD/YYYY", "MMDDYYYY"],
 
+	defaultFnFormula : "({{1}} |)({{2}} |)({{3}} |)({{4}} |)({{5}} |)({{6}} |)",
+
 	preferEmailPref : true,
 	
 	cardbookAccounts : [],
@@ -495,7 +497,7 @@ var cardbookRepository = {
 			if (cardbookRepository.cardbookCards.hasOwnProperty(key)) {
 				if (key.indexOf(aAccountId) >= 0) {
 					cardbookRepository.removeCardFromSearch(cardbookRepository.cardbookCards[key]);
-					if (cardbookRepository.cardbookFileCacheCards[aAccountId][cardbookRepository.cardbookCards[key].cacheuri]) {
+					if (cardbookRepository.cardbookFileCacheCards[aAccountId] && cardbookRepository.cardbookFileCacheCards[aAccountId][cardbookRepository.cardbookCards[key].cacheuri]) {
 						delete cardbookRepository.cardbookFileCacheCards[aAccountId][cardbookRepository.cardbookCards[key].cacheuri];
 					}
 					delete cardbookRepository.cardbookCards[key];
@@ -602,7 +604,12 @@ var cardbookRepository = {
 				var myFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 				myFile.initWithPath(myDirPrefIdUrl);
 				myFile.append(aFileName);
-				if (!(myFile.exists() && myFile.isFile())) {
+				if (aMode === "INITIAL") {
+					if (!myFile.exists()) {
+						cardbookSynchronization.writeCardsToFile(myFile.path, [aCard], true);
+						wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " written to directory");
+					}
+				} else {
 					cardbookSynchronization.writeCardsToFile(myFile.path, [aCard], true);
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " written to directory");
 				}

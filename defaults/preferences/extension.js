@@ -38,6 +38,8 @@ pref("extensions.cardbook.orgStructure", "");
 pref("extensions.cardbook.localizeEngine", "OpenStreetMap");
 pref("extensions.cardbook.localizeTarget", "in");
 
+pref("extensions.cardbook.fnFormula", "({{1}} |)({{2}} |)({{3}} |)({{4}} |)({{5}} |)({{6}} |)");
+
 pref("extensions.cardbook.addressBooksNameList", "allAddressBooks");
 pref("extensions.cardbook.calendarsNameList", "");
 pref("extensions.cardbook.searchInNote", true);

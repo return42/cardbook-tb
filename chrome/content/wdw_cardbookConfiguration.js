@@ -266,6 +266,43 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 			}
 		},
 
+		loadFnFormula: function () {
+			var strBundle = document.getElementById("cardbook-strings");
+			var myLabel = "";
+			myLabel = myLabel + "{{1}} : " + strBundle.getString("prefixnameLabel") + "    ";
+			myLabel = myLabel + "{{2}} : " + strBundle.getString("firstnameLabel") + "    ";
+			myLabel = myLabel + "{{3}} : " + strBundle.getString("othernameLabel") + "    ";
+			myLabel = myLabel + "{{4}} : " + strBundle.getString("lastnameLabel") + "    ";
+			myLabel = myLabel + "{{5}} : " + strBundle.getString("suffixnameLabel");
+			document.getElementById('fnFormulaDescriptionLabel1').value = myLabel.trim();
+			myLabel = "";
+			var count = 6;
+			if (wdw_cardbookConfiguration.allOrg.length === 0) {
+				myLabel = "{{6}} : " + strBundle.getString("orgLabel");
+			} else {
+				for (var i = 0; i < wdw_cardbookConfiguration.allOrg.length; i++) {
+					var index = count + i;
+					myLabel = myLabel + "{{" + index + "}} : " + wdw_cardbookConfiguration.allOrg[i] + "    ";
+				}
+			}
+			document.getElementById('fnFormulaDescriptionLabel2').value = myLabel.trim();
+		},
+
+		resetFnFormula: function () {
+			document.getElementById('fnFormulaTextBox').value = cardbookRepository.defaultFnFormula;
+		},
+
+		validateFnFormula: function () {
+			if (document.getElementById('fnFormulaTextBox').value == "") {
+				wdw_cardbookConfiguration.resetFnFormula();
+			}
+			// to be sure the pref is saved (resetting its value does not save the preference)
+			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+			var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+			str.data = document.getElementById('fnFormulaTextBox').value;
+			prefs.setComplexValue("extensions.cardbook.fnFormula", Components.interfaces.nsISupportsString, str);
+		},
+
 		loadEventEntryTitle: function () {
 			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 			var eventEntryTitle = prefs.getComplexValue("extensions.cardbook.eventEntryTitle", Components.interfaces.nsISupportsString).data;
@@ -599,6 +636,7 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 				}
 				wdw_cardbookConfiguration.allOrg.push(myArgs.type);
 				wdw_cardbookConfiguration.refreshListBoxOrg();
+				wdw_cardbookConfiguration.loadFnFormula();
 			}
 		},
 		
@@ -620,6 +658,7 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 						}
 					}
 					wdw_cardbookConfiguration.refreshListBoxOrg();
+					wdw_cardbookConfiguration.loadFnFormula();
 				}
 			}
 		},
@@ -636,6 +675,7 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 					}
 				}
 				wdw_cardbookConfiguration.refreshListBoxOrg();
+				wdw_cardbookConfiguration.loadFnFormula();
 			}
 		},
 		
@@ -1019,6 +1059,8 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 			wdw_cardbookConfiguration.loadDateFormats();
 			wdw_cardbookConfiguration.loadMailAccounts();
 			wdw_cardbookConfiguration.loadPrefEmailPref();
+			// loadFnFormula() depends on loadOrg()
+			wdw_cardbookConfiguration.loadFnFormula();
 			wdw_cardbookConfiguration.sortTrees(null, "mailAccountsTree");
 			Components.utils.import("resource://gre/modules/AddonManager.jsm");  
 			AddonManager.getAddonByID(cardbookRepository.LIGHTNING_ID, wdw_cardbookConfiguration.loadCalendars);
@@ -1035,6 +1077,7 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 			wdw_cardbookConfiguration.validateMailAccounts();
 			wdw_cardbookConfiguration.validatePrefEmailPref();
 			wdw_cardbookConfiguration.validateEventEntryTitle();
+			wdw_cardbookConfiguration.validateFnFormula();
 			if (!(wdw_cardbookConfiguration.validateCustoms())) {
 				// don't work
 				// return false;

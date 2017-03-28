@@ -1,9 +1,13 @@
 <!ENTITY settingsTitlelabel "Definições de impressão">
 <!ENTITY titleLabel "Título:">
 <!ENTITY titleAccesskey "T">
-<!ENTITY whatToPrintGroupboxLabel "O que imprimir">
 <!ENTITY displayHeadersLabel "Mostrar cabeçalho">
 <!ENTITY displayHeadersAccesskey "c">
+<!ENTITY displayFieldNamesLabel "??Field names??">
+<!ENTITY displayFieldNamesAccesskey "F">
+<!ENTITY displayTypesLabel "??Types and Preferences??">
+<!ENTITY displayTypesAccesskey "y">
+<!ENTITY whatToPrintGroupboxLabel "O que imprimir">
 <!ENTITY displayLabel "Nome de apresentação">
 <!ENTITY displayAccesskey "N">
 <!ENTITY personalLabel "Information pessoal">

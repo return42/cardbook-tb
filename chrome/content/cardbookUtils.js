@@ -242,6 +242,10 @@ if ("undefined" == typeof(cardbookUtils)) {
 			return vString.replace(/\\;/g,"@ESCAPEDSEMICOLON@").replace(/\\,/g,"@ESCAPEDCOMMA@");
 		},
 	
+		escapeString1: function (vString) {
+			return vString.replace(/\\\(/g,"@ESCAPEDLEFTPARENTHESIS@").replace(/\\\)/g,"@ESCAPEDRIGHTPARENTHESIS@");
+		},
+	
 		escapeArray: function (vArray) {
 			for (let i = 0; i<vArray.length; i++){
 				if (vArray[i] && vArray[i] != ""){
@@ -286,6 +290,10 @@ if ("undefined" == typeof(cardbookUtils)) {
 	
 		unescapeString: function (vString) {
 			return vString.replace(/@ESCAPEDSEMICOLON@/g,";").replace(/\\;/g,";").replace(/@ESCAPEDCOMMA@/g,",").replace(/\\,/g,",");
+		},
+	
+		unescapeString1: function (vString) {
+			return vString.replace(/@ESCAPEDLEFTPARENTHESIS@/g,"(").replace(/@ESCAPEDRIGHTPARENTHESIS@/g,")");
 		},
 	
 		unescapeArray: function (vArray) {
@@ -501,46 +509,88 @@ if ("undefined" == typeof(cardbookUtils)) {
 			}
 		},*/
 
-		getDisplayedName: function(aOldFn, aNewFn, aOldN, aNewN, aOldOrg, aNewOrg) {
-			var fnString = "";
-			if (aOldFn == "") {
-				if (aNewFn == "") {
-					fnString = cardbookUtils.cleanArray(aNewN).join(" ");
-					if (fnString == "") {
-						fnString = cardbookUtils.cleanArray(aOldN).join(" ");
-						if (fnString == "") {
-							fnString = aNewOrg;
-							if (fnString == "") {
-								fnString = aOldOrg;
+		getDisplayedName: function(aNewN, aNewOrg) {
+			var fnFormula = "";
+			var result =  "";
+			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+			fnFormula = prefs.getComplexValue("extensions.cardbook.fnFormula", Components.interfaces.nsISupportsString).data;
+			if (fnFormula == "") {
+				fnFormula = cardbookRepository.defaultFnFormula;
+			}
+			var orgStructure = prefs.getComplexValue("extensions.cardbook.orgStructure", Components.interfaces.nsISupportsString).data;
+
+			// personal informations part
+			var fnFormulaArray = cardbookUtils.escapeString1(fnFormula).split(')');
+			for (var i = 0; i < fnFormulaArray.length; i++) {
+				var tmpString = fnFormulaArray[i].substr(fnFormulaArray[i].indexOf("(")+1,fnFormulaArray[i].length);
+				var tmpStringArray = tmpString.split('|');
+				if (tmpStringArray[0].indexOf("{{1}}") >= 0) {
+					if (aNewN[0] != "") {
+						result = result + tmpStringArray[0].replace(/\{\{1\}\}/g, aNewN[0]);
+					} else if (tmpStringArray[1]) {
+						result = result + tmpStringArray[1];
+					}
+				}
+				if (tmpStringArray[0].indexOf("{{2}}") >= 0) {
+					if (aNewN[1] != "") {
+						result = result + tmpStringArray[0].replace(/\{\{2\}\}/g, aNewN[1]);
+					} else if (tmpStringArray[1]) {
+						result = result + tmpStringArray[1];
+					}
+				}
+				if (tmpStringArray[0].indexOf("{{3}}") >= 0) {
+					if (aNewN[2] != "") {
+						result = result + tmpStringArray[0].replace(/\{\{3\}\}/g, aNewN[2]);
+					} else if (tmpStringArray[1]) {
+						result = result + tmpStringArray[1];
+					}
+				}
+				if (tmpStringArray[0].indexOf("{{4}}") >= 0) {
+					if (aNewN[3] != "") {
+						result = result + tmpStringArray[0].replace(/\{\{4\}\}/g, aNewN[3]);
+					} else if (tmpStringArray[1]) {
+						result = result + tmpStringArray[1];
+					}
+				}
+				if (tmpStringArray[0].indexOf("{{5}}") >= 0) {
+					if (aNewN[4] != "") {
+						result = result + tmpStringArray[0].replace(/\{\{5\}\}/g, aNewN[4]);
+					} else if (tmpStringArray[1]) {
+						result = result + tmpStringArray[1];
+					}
+				}
+
+				// professional informations part
+				if (orgStructure != "") {
+					var count = 6;
+					var aOrgArray = cardbookUtils.unescapeArray(cardbookUtils.escapeString(aNewOrg).split(";"));
+					var allOrg = cardbookUtils.unescapeArray(cardbookUtils.escapeString(orgStructure).split(";"));
+					for (var j = 0; j < allOrg.length; j++) {
+						var index = count + j;
+						if (tmpStringArray[0].indexOf("{{" + index + "}}") >= 0) {
+							if (aOrgArray[j]) {
+								if (aOrgArray[j] != "") {
+									var myRegExp = new RegExp("\\{\\{" + index + "\\}\\}", "ig");
+									result = result + tmpStringArray[0].replace(myRegExp, aOrgArray[j]);
+								} else if (tmpStringArray[1]) {
+									result = result + tmpStringArray[1];
+								}
+							} else if (tmpStringArray[1]) {
+								result = result + tmpStringArray[1];
 							}
 						}
 					}
 				} else {
-					fnString = aNewFn;
-				}
-			} else {
-				if (aNewFn == aOldFn) {
-					if (cardbookUtils.cleanArray(aOldN).join(" ") == aOldFn) {
-						fnString = cardbookUtils.cleanArray(aNewN).join(" ");
-						if (fnString == "") {
-							fnString = aNewOrg;
+					if (tmpStringArray[0].indexOf("{{6}}") >= 0) {
+						if (aNewOrg != "") {
+							result = result + tmpStringArray[0].replace(/\{\{6\}\}/g, aNewOrg);
+						} else if (tmpStringArray[1]) {
+							result = result + tmpStringArray[1];
 						}
-					} else if (aOldOrg == aOldFn) {
-						fnString = aNewOrg;
-					} else {
-						fnString = aOldFn;
 					}
-				} else if (aNewFn == "") {
-					if (cardbookUtils.cleanArray(aNewN).join(" ") == "") {
-						fnString = aNewOrg;
-					} else {
-						fnString = cardbookUtils.cleanArray(aNewN).join(" ");
-					}
-				} else {
-					fnString = aNewFn;
 				}
 			}
-			return fnString;
+			return cardbookUtils.unescapeString1(result).trim();
 		},
 
 		parseLists: function(aCard, aMemberLines, aKindValue) {

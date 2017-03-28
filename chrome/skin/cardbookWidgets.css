@@ -1,0 +1,15 @@
+.categoriesListboxClass {
+    -moz-appearance: none !important;
+    background-color: menu;
+    margin: 0 0 4px 0;
+    border: 0;
+}
+
+.categoriesTextboxClass .textbox-search-icon {
+    list-style-image: none;
+    cursor:default;
+}
+
+.categoriesTextboxClass {
+    -moz-appearance: textfield;
+}

@@ -1,0 +1,7 @@
+<!ENTITY wdw_logEditionTitle "Prohlížeč protokolu">
+
+<!ENTITY logEditionValueLabel "Čas události">
+<!ENTITY logEditionTypeLabel "Typ">
+<!ENTITY flushLogEditionLabel "Vyprázdnit">
+<!ENTITY clipboardLogEditionLabel "Kopírovat do schránky">
+<!ENTITY cancelLogEditionLabel "OK">

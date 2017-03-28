@@ -1,0 +1,73 @@
+﻿.cardbookBackgroundColorClass caption,
+.cardbookBackgroundColorClass groupbox {
+	-moz-appearance: none !important;
+	background-color: white !important;
+	border: 0px !important;
+}
+
+.cardbookBackgroundColorClass textbox[readonly="true"] {
+	-moz-appearance: none !important;
+	background-color: white !important;
+	border: 0px !important;
+	min-height:16px !important;
+	padding-left: 0px !important;
+}
+.cardbookBackgroundColorClass textbox[link="true"] {
+	-moz-appearance: none !important;
+	background-color: white !important;
+	border: 0px !important;
+	cursor: pointer !important;
+	color: -moz-hyperlinktext;
+	text-decoration: underline !important;
+	min-height:16px !important;
+}
+ .cardbookBackgroundColorClass textbox[link="true"]:hover {
+	-moz-appearance: none !important;
+	color: -moz-activehyperlinktext;
+}
+
+#mainEditionBox,
+#mainHbox {
+	-moz-appearance: none !important;
+	background-color: white !important;
+	border: 0px !important;
+}
+.cardbookBackgroundColorClass textbox {
+	min-height:16px !important;
+}
+
+.cardbookVerticalSplitterClass {
+	-moz-appearance: none !important;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 2px solid ThreeDShadow;
+	border-bottom: 0px;
+	overflow: hidden;
+	background-color: white;
+}
+.cardbookHorizontalSplitterClass {
+	-moz-appearance: none !important;
+	border-top: 2px solid ThreeDShadow;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	overflow: hidden;
+	background-color: white;
+}
+
+.cardbookPrefClass {
+	list-style-image: url("chrome://cardbook/skin/valid_32_16.png");
+	-moz-image-region: rect(0 16px 16px 0);
+}
+.cardbookNotPrefClass {
+	list-style-image: url("chrome://cardbook/skin/valid_32_16.png");
+	-moz-image-region: rect(0 32px 16px 16px);
+}
+
+menulist[type="cardbookPanelMenulist"] {
+   -moz-binding: url("chrome://cardbook/content/widgets/cardbookWidgets.xml#cardbookPanelMenulist");
+}
+
+panel[type="cardbookCategoryPanel"] {
+   -moz-binding: url("chrome://cardbook/content/widgets/cardbookWidgets.xml#cardbookCategoryPanel");
+}

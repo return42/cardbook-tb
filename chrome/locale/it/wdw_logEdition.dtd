@@ -1,0 +1,7 @@
+<!ENTITY wdw_logEditionTitle "Visualizzatore di registro">
+
+<!ENTITY logEditionValueLabel "Evento di marcatura oraria">
+<!ENTITY logEditionTypeLabel "Tipo">
+<!ENTITY flushLogEditionLabel "Svuota">
+<!ENTITY clipboardLogEditionLabel "Copia negli appunti">
+<!ENTITY cancelLogEditionLabel "OK">

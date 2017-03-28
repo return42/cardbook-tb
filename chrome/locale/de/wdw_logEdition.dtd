@@ -1,0 +1,7 @@
+<!ENTITY wdw_logEditionTitle "Ansicht des Protokolls">
+
+<!ENTITY logEditionValueLabel "Zeile">
+<!ENTITY logEditionTypeLabel "Art">
+<!ENTITY flushLogEditionLabel "Flush">
+<!ENTITY clipboardLogEditionLabel "In die Zwischenablage kopieren">
+<!ENTITY cancelLogEditionLabel "OK">

@@ -1,0 +1,26 @@
+<!ENTITY settingsTitlelabel "Impostazioni di stampa">
+<!ENTITY titleLabel "Titolo:">
+<!ENTITY titleAccesskey "T">
+<!ENTITY whatToPrintGroupboxLabel "Cosa stampare">
+<!ENTITY displayHeadersLabel "Mostra le intestazioni di paragrafo">
+<!ENTITY displayHeadersAccesskey "i">
+<!ENTITY displayLabel "Mostra nome">
+<!ENTITY displayAccesskey "M">
+<!ENTITY personalLabel "Informazioni personali">
+<!ENTITY personalAccesskey "p">
+<!ENTITY orgLabel "Informazioni professionali">
+<!ENTITY orgAccesskey "o">
+<!ENTITY categoriesLabel "Categorie">
+<!ENTITY categoriesAccesskey "C">
+<!ENTITY adrLabel "Indirizzi">
+<!ENTITY adrAccesskey "d">
+<!ENTITY telLabel "Numeri di telefono">
+<!ENTITY telAccesskey "T">
+<!ENTITY emailLabel "Indirizzi email">
+<!ENTITY emailAccesskey "e">
+<!ENTITY imppLabel "Indirizzi di messaggistica istantanea">
+<!ENTITY imppAccesskey "I">
+<!ENTITY urlLabel "URL">
+<!ENTITY urlAccesskey "U">
+<!ENTITY noteLabel "Note">
+<!ENTITY noteAccesskey "N">

@@ -1,0 +1,59 @@
+<!ENTITY wizard.title "Adresboek toevoegen">
+<!ENTITY wizard.label "Adresboek toevoegen">
+
+<!ENTITY welcomePage.wizard.description "Welkom">
+<!ENTITY welcomePage.description "Bij het eerste gebruik van CardBook wordt geprobeerd om de contactpersonen uit het standaard-adresboek van Thunderbird te importeren.">
+
+<!ENTITY initialpage.wizard.description "Opslag van het nieuwe adresboek">
+<!ENTITY initialpage.description "Staat het nieuwe adresboek lokaal of op internet:">
+<!ENTITY initialpage.computer.label "Lokaal">
+<!ENTITY initialpage.network.label "Op internet">
+<!ENTITY initialpage.search.label "Zoeken in bestaande adresboeken">
+
+<!ENTITY locationComputerPage.wizard.description "Plaats en type van het lokale adresboek.">
+<!ENTITY locationComputerPage.type.description "Type van het lokale adresboek:">
+<!ENTITY locationComputerPage.type.label "Type">
+<!ENTITY locationComputerPage.createDirectory.label "Nieuw adresboek toevoegen (Map)">
+<!ENTITY locationComputerPage.createFile.label "Nieuw adresboek toevoegen (Bestand)">
+<!ENTITY locationComputerPage.openDirectory.label "Open een bestaand adresboek (Map)">
+<!ENTITY locationComputerPage.openFile.label "Open een bestaand adresboek (Bestand)">
+<!ENTITY locationComputerPage.standard.label "Importeren standaard-adresboek van Thunderbird (Map)">
+<!ENTITY locationComputerPage.uri.label "Map of bestand">
+<!ENTITY locationComputerPage.uri.description "Gebruik Verkenner om de lokatie van het nieuwe adresboek te kiezen. In geval van een nieuw bestand, kies '.vcf' als bestandsextensie.">
+<!ENTITY locationFirstPage.uri.description "Kies de lokatie voor het nieuwe adresboek">
+<!ENTITY locationComputerPage.uributton.label "Verkenner">
+
+<!ENTITY locationNetworkPage.wizard.description "Type en plaats van het nieuwe internet-adresboek.">
+<!ENTITY locationNetworkPage.description "Type van het internet-adresboek: (Pas op: Google ondersteunt geen vCard-standaarden.)">
+<!ENTITY locationNetworkPage.type.label "Type">
+<!ENTITY locationNetworkPage.carddav.label "CardDAV">
+<!ENTITY locationNetworkPage.google.label "Google">
+<!ENTITY locationNetworkPage.apple.label "Apple">
+<!ENTITY locationNetworkPage.connection.label "Verbinding">
+<!ENTITY locationNetworkPage.uri.description "Bij een CardDAV-type: vul de URL van het internet-adresboek in.">
+<!ENTITY locationNetworkPage.uri.label "URL">
+<!ENTITY locationNetworkPage.credentials.description "Toegangscodes voor het internet-adresboek. (Let op: voor Google-adresboek de Google-email invullen.)">
+<!ENTITY locationNetworkPage.validatebutton.label "Controleren">
+
+<!ENTITY locationSearchPage.wizard.description "Definitie van geavanceerd zoeken">
+<!ENTITY locationSearchPage.label "Geavanceerd zoeken">
+
+<!ENTITY googleOauthPage.wizard.description "Google-authenticatie">
+
+<!ENTITY namePage.wizard.description "Eigenschappen van adresboek">
+<!ENTITY namePage.selected.label "Geselecteerd">
+<!ENTITY namePage.name.label "Naam">
+<!ENTITY namePage.color.label "Kleur">
+<!ENTITY namePage.urnuuid.label "Gebruik maken van urn:uuid">
+<!ENTITY namePage.readonly.label "Alleen lezen-modus">
+<!ENTITY namePage.vCardVersion.label "vCard">
+
+<!ENTITY namesPage.wizard.description "Eigenschappen van adresboeken">
+<!ENTITY namesPage.name.label "Namen">
+<!ENTITY namesPage.name.description "Er zijn meerdere adresboeken gevonden. Kies welke geopend moeten worden en kies de namen:">
+
+<!ENTITY finishPage.wizard.description "Adresboek is geconfigureerd">
+<!ENTITY finishPage.description "Het nieuwe adresboek is succesvol geconfigureerd.">
+
+<!ENTITY finishsPage.wizard.description "Adresboeken geconfigureerd">
+<!ENTITY finishsPage.description "De nieuwe adresboeken zijn succesvol geconfigureerd.">

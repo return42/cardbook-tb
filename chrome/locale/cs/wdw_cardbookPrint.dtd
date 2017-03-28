@@ -1,0 +1,26 @@
+<!ENTITY settingsTitlelabel "Nastavení tisku">
+<!ENTITY titleLabel "Titulek">
+<!ENTITY titleAccesskey "T">
+<!ENTITY whatToPrintGroupboxLabel "Co tisknout">
+<!ENTITY displayHeadersLabel "Zobrazit hlavičky odstavců">
+<!ENTITY displayHeadersAccesskey "h">
+<!ENTITY displayLabel "Zobrazované jméno">
+<!ENTITY displayAccesskey "Z">
+<!ENTITY personalLabel "Osobní informace">
+<!ENTITY personalAccesskey "O">
+<!ENTITY orgLabel "Profesní informace">
+<!ENTITY orgAccesskey "P">
+<!ENTITY categoriesLabel "Kategorie">
+<!ENTITY categoriesAccesskey "K">
+<!ENTITY adrLabel "Adresy">
+<!ENTITY adrAccesskey "A">
+<!ENTITY telLabel "Telefonní čísla">
+<!ENTITY telAccesskey "T">
+<!ENTITY emailLabel "E-mailové adresy">
+<!ENTITY emailAccesskey "E">
+<!ENTITY imppLabel "Adresy IM">
+<!ENTITY imppAccesskey "I">
+<!ENTITY urlLabel "URL">
+<!ENTITY urlAccesskey "U">
+<!ENTITY noteLabel "Poznámky">
+<!ENTITY noteAccesskey "z">

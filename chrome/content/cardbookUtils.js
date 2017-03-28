@@ -428,6 +428,45 @@ if ("undefined" == typeof(cardbookUtils)) {
 				var result = "";
 				if (aMediaConversion) {
 					if (aCard[aType].URI != null && aCard[aType].URI !== undefined && aCard[aType].URI != "") {
+						result = "VALUE=URI:" + aCard[aType].URI;
+					} else if (aCard[aType].localURI != null && aCard[aType].localURI !== undefined && aCard[aType].localURI != "") {
+						result = "VALUE=URI:" + aCard[aType].localURI;
+						var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+						var myFileURI = ioService.newURI(aCard[aType].localURI, null, null);
+						var content = btoa(cardbookSynchronization.getFileBinary(myFileURI));
+						if (aCard.version === "4.0") {
+							if (aCard[aType].extension != "") {
+								result = "DATA:IMAGE/" + aCard[aType].extension.toUpperCase() + ";BASE64," + content;
+							} else {
+								result = "BASE64," + content;
+							}
+						} else if (aCard.version === "3.0") {
+							if (aCard[aType].extension != "") {
+								result = "ENCODING=B;TYPE=" + aCard[aType].extension.toUpperCase() + ":" + content;
+							} else {
+								result = "ENCODING=B:" + content;
+							}
+						}
+					}
+				} else {
+					if (aCard[aType].URI != null && aCard[aType].URI !== undefined && aCard[aType].URI != "") {
+						result = "VALUE=URI:" + aCard[aType].URI;
+					} else if (aCard[aType].localURI != null && aCard[aType].localURI !== undefined && aCard[aType].localURI != "") {
+						result = "VALUE=URI:" + aCard[aType].localURI;
+					}
+				}
+				return result;
+			}
+			catch (e) {
+				wdw_cardbooklog.updateStatusProgressInformation("cardbookUtils.getMediaContentForCard error : " + e, "Error");
+			}
+		},
+
+		/*getMediaContentForCard: function(aCard, aType, aMediaConversion) {
+			try {
+				var result = "";
+				if (aMediaConversion) {
+					if (aCard[aType].URI != null && aCard[aType].URI !== undefined && aCard[aType].URI != "") {
 						result = "VALUE=uri:" + aCard[aType].URI;
 					} else if (aCard[aType].localURI != null && aCard[aType].localURI !== undefined && aCard[aType].localURI != "") {
 						result = "VALUE=uri:" + aCard[aType].localURI;
@@ -460,7 +499,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 			catch (e) {
 				wdw_cardbooklog.updateStatusProgressInformation("cardbookUtils.getMediaContentForCard error : " + e, "Error");
 			}
-		},
+		},*/
 
 		getDisplayedName: function(aOldFn, aNewFn, aOldN, aNewN, aOldOrg, aNewOrg) {
 			var fnString = "";

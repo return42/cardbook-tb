@@ -103,7 +103,7 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 					cardbookRepository.addCardToRepository(result.value, myMode, result.value.cacheuri);
 					cardbookRepository.cardbookServerSyncDone[aDirPrefId]++;
 					cardbookRepository.cardbookServerSyncTotal[aDirPrefId]++;
-					cardbookUtils.formatStringForOutput("cardLoadedFromCache", [aDirPrefName, result.value.fn]);
+					cardbookUtils.formatStringForOutput("cardLoadedFromCacheDB", [aDirPrefName, result.value.fn]);
 					result.continue();
 				}
 			};
@@ -115,27 +115,42 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 
 		// once the DB is open, this is the second step for the AB
 		// which use the DB caching
-		getItemByCacheuri: function (aWrongCacheuri, aCallback, aParams) {
-			var mySepPosition = aWrongCacheuri.indexOf("::",0);
-			if (mySepPosition != -1) {
-				var cacheuri = aWrongCacheuri.substr(0, mySepPosition);
-			} else {
-				var cacheuri = aWrongCacheuri;
-			}
+		getItemByCacheuri: function (aCacheuri, aCallback, aParams) {
 			var cb = aCallback;
 			var params = aParams;
 			var db = cardbookRepository.cardbookDatabase.db;
 			var transaction = db.transaction(["cards"], "readonly");
 			var store = transaction.objectStore("cards");
-			var keyRange = IDBKeyRange.bound(cacheuri, cacheuri + '\uffff');
+			var keyRange = IDBKeyRange.bound(aCacheuri, aCacheuri + '\uffff');
 			var cursorRequest = store.index('cacheuriIndex').openCursor(keyRange);
 		
 			cursorRequest.onsuccess = function(e) {
 				var result = e.target.result;
 				if (result) {
-					if (result.value.cacheuri+"::"+result.value.dirPrefId == aWrongCacheuri) {
+					if (result.value.cacheuri == aCacheuri) {
 						cb(result.value, params);
 					}
+					result.continue();
+				}
+			};
+			
+			cursorRequest.onerror = function(e) {
+				cardbookRepository.cardbookDatabase.onerror();
+			};
+		},
+
+		// remove an account
+		removeAccount: function (aDirPrefId, aDirPrefName) {
+			var db = cardbookRepository.cardbookDatabase.db;
+			var transaction = db.transaction(["cards"], "readwrite");
+			var store = transaction.objectStore("cards");
+			var keyRange = IDBKeyRange.bound(aDirPrefId, aDirPrefId + '\uffff');
+			var cursorRequest = store.openCursor(keyRange);
+		
+			cursorRequest.onsuccess = function(e) {
+				var result = e.target.result;
+				if (result) {
+					cardbookIndexedDB.removeItem(aDirPrefName, result.value);
 					result.continue();
 				}
 			};

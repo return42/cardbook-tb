@@ -1683,7 +1683,9 @@ if ("undefined" == typeof(wdw_cardbook)) {
 								returnFlag = prompts.confirm(window, confirmTitle, confirmMsg);
 							}
 							if (returnFlag) {
-								cardbookRepository.removeAccountFromRepository(myParentAccountId);
+								cardbookRepository.removeAccountFromRepository(myParentAccountId, myParentAccountName);
+								// cannot be launched from cardbookRepository
+								cardbookIndexedDB.removeAccount(myParentAccountId, myParentAccountName);
 								let cardbookPrefService = new cardbookPreferenceService(myParentAccountId);
 								cardbookPrefService.delBranch();
 								cardbookUtils.formatStringForOutput("addressbookClosed", [myParentAccountName]);
@@ -2799,10 +2801,10 @@ if ("undefined" == typeof(wdw_cardbook)) {
 
 			if (cardbookRepository.cardbookSyncMode === "SYNC") {
 				wdw_cardbook.enableOrDisableElement(['cardbookToolbarAddServerButton', 'cardbookToolbarConfigurationButton', 'accountsOrCatsTreeContextMenu', 'cardsTreeContextMenu',
-													'cardbookAccountMenu', 'cardbookContactsMenu', 'cardbookToolsMenu', 'cardbookToolbarPrintButton'], true);
+													'cardbookAccountMenu', 'cardbookContactsMenu', 'cardbookToolsMenu', 'cardbookToolbarComplexSearch', 'cardbookToolbarPrintButton'], true);
 			} else {
 				wdw_cardbook.enableOrDisableElement(['cardbookToolbarAddServerButton', 'cardbookToolbarConfigurationButton', 'accountsOrCatsTreeContextMenu', 'cardsTreeContextMenu',
-													'cardbookAccountMenu', 'cardbookContactsMenu', 'cardbookToolsMenu', 'cardbookToolbarPrintButton'], false);
+													'cardbookAccountMenu', 'cardbookContactsMenu', 'cardbookToolsMenu', 'cardbookToolbarComplexSearch', 'cardbookToolbarPrintButton'], false);
 			}
 			wdw_cardbook.updateStatusInformation();
 			wdw_cardbook.updateStatusProgressInformationField();

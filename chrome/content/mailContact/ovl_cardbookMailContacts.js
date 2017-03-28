@@ -182,7 +182,8 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 					mail3PaneWindow.focus();
 				}
 			}
-            tabmail.openTab("glodaFacet", {searcher: new GlodaMsgSearcher(null, '"' + listOfEmail.join('" "') + '"', false)});
+			Components.utils.import("resource:///modules/gloda/msg_search.js");
+			tabmail.openTab("glodaFacet", {searcher: new GlodaMsgSearcher(null, '"' + listOfEmail.join('" "') + '"', false)});
 		},
 
 		findEventsFromEmail: function() {

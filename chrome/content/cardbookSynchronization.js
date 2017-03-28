@@ -932,10 +932,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 			if (!(cardbookRepository.filesFromCacheDB[aPrefId])) {
 				cardbookRepository.filesFromCacheDB[aPrefId] = [];
 			}
-			for (var i in cardbookRepository.cardbookFileCacheCards) {
-				if (i.indexOf("::"+aPrefId) >= 0) {
-					cardbookRepository.filesFromCacheDB[aPrefId].push(i);
-				}
+			for (var i in cardbookRepository.cardbookFileCacheCards[aPrefId]) {
+				cardbookRepository.filesFromCacheDB[aPrefId].push(i);
 			}
 		},
 
@@ -1105,8 +1103,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 		},
 
 		compareServerCardWithCache: function (aCardConnection, aConnection, aMode, aPrefIdType, aUrl, aEtag, aFileName) {
-			if (cardbookRepository.cardbookFileCacheCards[aFileName+"::"+aConnection.connPrefId]) {
-				var myCacheCard = cardbookRepository.cardbookFileCacheCards[aFileName+"::"+aConnection.connPrefId];
+			if (cardbookRepository.cardbookFileCacheCards[aConnection.connPrefId] && cardbookRepository.cardbookFileCacheCards[aConnection.connPrefId][aFileName]) {
+				var myCacheCard = cardbookRepository.cardbookFileCacheCards[aConnection.connPrefId][aFileName];
 				var myServerCard = new cardbookCardParser();
 				cardbookUtils.cloneCard(myCacheCard, myServerCard);
 				cardbookUtils.addEtag(myServerCard, aEtag);
@@ -1267,7 +1265,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 											var aCardConnection = {accessToken: aConnection.accessToken, connPrefId: aConnection.connPrefId, connUrl: myUrl, connDescription: aConnection.connDescription};
 											cardbookSynchronization.compareServerCardWithCache(aCardConnection, aConnection, aMode, aPrefIdType, myUrl, etag, myFileName);
 											function filterFileName(element) {
-												return (element != myFileName+"::"+aConnection.connPrefId);
+												return (element != myFileName);
 											}
 											cardbookRepository.filesFromCacheDB[aConnection.connPrefId] = cardbookRepository.filesFromCacheDB[aConnection.connPrefId].filter(filterFileName);
 											cardbookRepository.cardbookServerSyncHandleRemainingTotal[aConnection.connPrefId] = cardbookRepository.filesFromCacheDB[aConnection.connPrefId].length;
@@ -1361,7 +1359,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 													var aCardConnection = {connPrefId: aConnection.connPrefId, connUrl: myUrl, connDescription: aConnection.connDescription};
 													cardbookSynchronization.compareServerCardWithCache(aCardConnection, aConnection, aMode, aPrefIdType, myUrl, etag, myFileName);
 													function filterFileName(element) {
-														return (element != myFileName+"::"+aConnection.connPrefId);
+														return (element != myFileName);
 													}
 													cardbookRepository.filesFromCacheDB[aConnection.connPrefId] = cardbookRepository.filesFromCacheDB[aConnection.connPrefId].filter(filterFileName);
 													cardbookRepository.cardbookServerSyncHandleRemainingTotal[aConnection.connPrefId] = cardbookRepository.filesFromCacheDB[aConnection.connPrefId].length;
@@ -2362,6 +2360,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						for (var i = start; i < fileContentArrayLength; i++) {
 							try {
 								var myCard = new cardbookCardParser();
+								myCard.dirPrefId = aParams.aPrefId;
 								for (var j = 0; j < fileContentArray[i].length; j++) {
 									cardbookUtils.setCardValueByField(myCard, myArgs.template[j][0], fileContentArray[i][j]);
 								}

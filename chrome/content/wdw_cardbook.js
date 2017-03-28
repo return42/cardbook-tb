@@ -693,7 +693,6 @@ if ("undefined" == typeof(wdw_cardbook)) {
 				var listOfSelectedUid = [];
 				for (var i = 0; i < aListOfSelectedCard.length; i++) {
 					listOfSelectedUid.push(aListOfSelectedCard[i].dirPrefId + "::" + aListOfSelectedCard[i].uid);
-					var myDirPrefId = aListOfSelectedCard[i].dirPrefId;
 				}
 				let myText = listOfSelectedUid.join("@@@@@");
 				if (myText != null && myText !== undefined && myText != "") {
@@ -709,11 +708,10 @@ if ("undefined" == typeof(wdw_cardbook)) {
 					if (aMode == "CUT") {
 						var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
 						var strBundle = document.getElementById("cardbook-strings");
-						var myDirPrefName = cardbookUtils.getPrefNameFromPrefId(myDirPrefId);
 						if (cardsCount > 1) {
-							wdw_cardbook.cutAndPaste = strBundle.getFormattedString("movedCardsDeletionConfirmMessage", [cardsCount, myDirPrefName]);
+							wdw_cardbook.cutAndPaste = strBundle.getFormattedString("movedCardsDeletionConfirmMessage", [cardsCount]);
 						} else {
-							wdw_cardbook.cutAndPaste = strBundle.getFormattedString("movedCardDeletionConfirmMessage", [myDirPrefName]);
+							wdw_cardbook.cutAndPaste = strBundle.GetStringFromName("movedCardDeletionConfirmMessage");
 						}
 					} else {
 						wdw_cardbook.cutAndPaste = "";
@@ -739,10 +737,17 @@ if ("undefined" == typeof(wdw_cardbook)) {
 					
 					var dataArray = str.split("@@@@@");
 					if (dataArray.length) {
-						for (var i = 0; i < dataArray.length; i++) {
+						var dataLength = dataArray.length
+						for (var i = 0; i < dataLength; i++) {
 							if (cardbookRepository.cardbookCards[dataArray[i]]) {
 								var myCard = cardbookRepository.cardbookCards[dataArray[i]];
-								cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardPasted");
+								// performance reason
+								// update the UI only at the end
+								if (i == dataLength - 1) {
+									cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardPasted");
+								} else {
+									cardbookSynchronization.importCard(myCard, myTarget, false);
+								}
 								myListOfCard.push(myCard);
 							} else {
 								cardbookUtils.formatStringForOutput("clipboardWrong");
@@ -1271,10 +1276,17 @@ if ("undefined" == typeof(wdw_cardbook)) {
 						aEvent.preventDefault();
 						var dataArray = aEvent.dataTransfer.getData("text/plain").split("@@@@@");
 						if (dataArray.length) {
-							for (var i = 0; i < dataArray.length; i++) {
+							var dataLength = dataArray.length
+							for (var i = 0; i < dataLength; i++) {
 								if (cardbookRepository.cardbookCards[dataArray[i]]) {
 									var myCard = cardbookRepository.cardbookCards[dataArray[i]];
-									cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardDragged");
+									// performance reason
+									// update the UI only at the end
+									if (i == dataLength - 1) {
+										cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardDragged");
+									} else {
+										cardbookSynchronization.importCard(myCard, myTarget, false);
+									}
 								} else {
 									cardbookUtils.formatStringForOutput("draggableWrong");
 								}

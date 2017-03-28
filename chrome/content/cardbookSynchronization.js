@@ -2233,12 +2233,13 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 					var fileContentArray = aContent.split(re);
 					var cardContent = "";
 
-					for (let i = 0; i < fileContentArray.length; i++) {
+					var fileContentArrayLength = fileContentArray.length
+					for (let i = 0; i < fileContentArrayLength; i++) {
 						if (fileContentArray[i] == "BEGIN:VCARD") {
 							cardbookRepository.cardbookServerSyncTotal[aParams.aPrefId]++;
 						}
 					}
-					for (let i = 0; i < fileContentArray.length; i++) {
+					for (let i = 0; i < fileContentArrayLength; i++) {
 						if (fileContentArray[i] == "BEGIN:VCARD") {
 							cardContent = fileContentArray[i];
 						} else if (fileContentArray[i] == "END:VCARD") {
@@ -2278,7 +2279,13 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 										cardbookRepository.addCardToRepository(myCard, aParams.aMode);
 									}
 								} else {
-									cardbookSynchronization.importCard(myCard, aParams.aTarget, true, aParams.aSource);
+									// performance reason
+									// update the UI only at the end
+									if (i == fileContentArrayLength - 1) {
+										cardbookSynchronization.importCard(myCard, aParams.aTarget, true, aParams.aSource);
+									} else {
+										cardbookSynchronization.importCard(myCard, aParams.aTarget, true);
+									}
 								}
 								cardbookRepository.cardbookServerSyncDone[aParams.aPrefId]++;
 							}
@@ -2350,8 +2357,9 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						} else {
 							var start = 0;
 						}
-						cardbookRepository.cardbookServerSyncTotal[aParams.aPrefId] = fileContentArray.length - start;
-						for (var i = start; i < fileContentArray.length; i++) {
+						var fileContentArrayLength = fileContentArray.length
+						cardbookRepository.cardbookServerSyncTotal[aParams.aPrefId] = fileContentArrayLength - start;
+						for (var i = start; i < fileContentArrayLength; i++) {
 							try {
 								var myCard = new cardbookCardParser();
 								for (var j = 0; j < fileContentArray[i].length; j++) {
@@ -2377,7 +2385,13 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 								}
 								continue;
 							}
-							cardbookSynchronization.importCard(myCard, aParams.aTarget, true, aParams.aSource);
+							// performance reason
+							// update the UI only at the end
+							if (i == fileContentArrayLength - 1) {
+								cardbookSynchronization.importCard(myCard, aParams.aTarget, true, aParams.aSource);
+							} else {
+								cardbookSynchronization.importCard(myCard, aParams.aTarget, true);
+							}
 							delete myCard;
 							cardbookRepository.cardbookServerSyncDone[aParams.aPrefId]++;
 						}

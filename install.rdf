@@ -6,7 +6,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>cardbook@vigneau.philippe</em:id>
 		<em:name>CardBook</em:name>
-		<em:version>17.3</em:version>
+		<em:version>17.4</em:version>
 		<em:type>2</em:type>
 		<em:description>vCard Addressbook</em:description>
 		<em:creator>Philippe VIGNEAU</em:creator>
@@ -25,6 +25,7 @@
 		<em:translator>ÓVÁRI (hu)</em:translator>
 		<em:translator>Agnese MORETTINI (it)</em:translator>
 		<em:translator>Han KNOLS (nl)</em:translator>
+		<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 		<em:translator>André BAÇÃO (pt-PT)</em:translator>
 		<em:optionsURL>chrome://cardbook/content/wdw_cardbookConfiguration.xul</em:optionsURL>
 		<em:iconURL>chrome://cardbook/skin/cardbook_32_32.png</em:iconURL>
@@ -58,6 +59,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -82,6 +84,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -106,6 +109,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -130,6 +134,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -154,6 +159,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -178,6 +184,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -202,6 +209,32 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
+				<em:translator>André BAÇÃO (pt-PT)</em:translator>
+			</Description>
+		</em:localized>
+		
+		<em:localized>
+			<Description>
+				<em:locale>pl</em:locale>
+				<em:name>CardBook</em:name>
+				<em:description>Książka adresowa z obsługą vCard</em:description>
+				<em:contributor>Alexander BERGMANN</em:contributor>
+				<em:contributor>R. Kent JAMES</em:contributor>
+				<em:contributor>Timothe LITT</em:contributor>
+				<em:contributor>Christoph MAIR</em:contributor>
+				<em:contributor>Boris PRÜSSMANN</em:contributor>
+				<em:contributor>Lukáš TYRYCHTR</em:contributor>
+				<em:translator>Lukáš TYRYCHTR (cs)</em:translator>
+				<em:translator>Alexander BERGMANN (de)</em:translator>
+				<em:translator>Markus MAUERER (de)</em:translator>
+				<em:translator>Oliver SCHUPPE (de)</em:translator>
+				<em:translator>Timothe LITT (en-US)</em:translator>
+				<em:translator>Philippe VIGNEAU (fr)</em:translator>
+				<em:translator>ÓVÁRI (hu)</em:translator>
+				<em:translator>Agnese MORETTINI (it)</em:translator>
+				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>
@@ -226,6 +259,7 @@
 				<em:translator>ÓVÁRI (hu)</em:translator>
 				<em:translator>Agnese MORETTINI (it)</em:translator>
 				<em:translator>Han KNOLS (nl)</em:translator>
+				<em:translator>Adam GORZKIEWICZ (pl)</em:translator>
 				<em:translator>André BAÇÃO (pt-PT)</em:translator>
 			</Description>
 		</em:localized>

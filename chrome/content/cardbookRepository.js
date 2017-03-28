@@ -1144,7 +1144,11 @@ var cardbookRepository = {
 					}
 					cardbookUtils.formatStringForOutput("cardDeletedOK", [myDirPrefIdName, aListOfCards[i].fn]);
 					wdw_cardbooklog.addActivity("cardDeletedOK", [myDirPrefIdName, aListOfCards[i].fn], "deleteMail");
-					cardbookUtils.notifyObservers(aSource);
+					// performance reason
+					// update the UI only at the end
+					if (i == aListOfCards.length - 1) {
+						cardbookUtils.notifyObservers(aSource);
+					}
 				}
 			}
 			cardbookRepository.reWriteFiles(listOfFileToRewrite);

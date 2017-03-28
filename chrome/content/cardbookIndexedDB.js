@@ -61,7 +61,7 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 			var db = cardbookRepository.cardbookDatabase.db;
 			var transaction = db.transaction(["cards"], "readwrite");
 			var store = transaction.objectStore("cards");
-			var cursorRequest = store.add(aCard);
+			var cursorRequest = store.put(aCard);
 			cursorRequest.onsuccess = function(e) {
 				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(aDirPrefIdName + " : debug mode : Contact " + aCard.fn + " written to DB");
 			};

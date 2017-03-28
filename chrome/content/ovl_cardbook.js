@@ -128,8 +128,9 @@ if ("undefined" == typeof(ovl_cardbook)) {
 					mail3PaneWindow.focus();
 				}
 			}
-			var strBundle = document.getElementById("cardbook-strings");
-			tabmail.openTab('cardbook', {title: strBundle.getString("cardbookTitle")});
+			var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+			var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
+			tabmail.openTab('cardbook', {title: strBundle.GetStringFromName("cardbookTitle")});
 		}
 	};
 };

@@ -358,10 +358,12 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 			cardbookUtils.formatStringForOutput("importCardsKO", [aPrefName, cardbookRepository.cardbookServerSyncError[aPrefId]]);
 		},
 		
-		askUser: function(aMessage, aButton1, aButton2, aButton3) {
-			var myArgs = {message: aMessage, button1: aButton1, button2: aButton2, button3: aButton3, result: "cancel"};
+		askUser: function(aMessage, aButton1, aButton2, aButton3, aButton4, aConfirmMessage, aConfirmValue) {
+			var myArgs = {message: aMessage, button1: aButton1, button2: aButton2, button3: aButton3, button4: aButton4,
+							confirmMessage: aConfirmMessage, confirmValue: aConfirmValue, 
+							result: "cancel", resultConfirm: false};
 			var myWindow = window.openDialog("chrome://cardbook/content/wdw_cardbookAskUser.xul", "", "chrome,modal,resizable,centerscreen", myArgs);
-			return myArgs.result;
+			return {result: myArgs.result, resultConfirm: myArgs.resultConfirm};
 		},
 		
 		getRootUrl: function (aUrl) {
@@ -932,8 +934,10 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 			if (!(cardbookRepository.filesFromCacheDB[aPrefId])) {
 				cardbookRepository.filesFromCacheDB[aPrefId] = [];
 			}
-			for (var i in cardbookRepository.cardbookFileCacheCards[aPrefId]) {
-				cardbookRepository.filesFromCacheDB[aPrefId].push(i);
+			if (cardbookRepository.cardbookFileCacheCards[aPrefId]) {
+				for (var i in cardbookRepository.cardbookFileCacheCards[aPrefId]) {
+					cardbookRepository.filesFromCacheDB[aPrefId].push(i);
+				}
 			}
 		},
 
@@ -1039,6 +1043,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 					params["aConnection"] = aConnection;
 					params["aMode"] = aMode;
 					params["aPrefIdType"] = aPrefIdType;
+					params["aDirPrefId"] = aConnection.connPrefId;
 					cardbookIndexedDB.getItemByCacheuri(cardbookRepository.filesFromCacheDB[aConnection.connPrefId][i], cardbookSynchronization.handleRemainingCacheAsync, params);
 				}
 			}
@@ -1069,7 +1074,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 						var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
 						var message = strBundle.formatStringFromName("cardUpdatedOnDiskDeletedOnServer", [aParams.aConnection.connDescription, aCard.fn], 2);
-						var conflictResult = cardbookSynchronization.askUser(message, "keep", "delete");
+						var askUserResult = cardbookSynchronization.askUser(message, "keep", "delete");
+						var conflictResult = askUserResult.result;
 					}
 					
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug1(aParams.aConnection.connDescription + " : debug mode : conflict resolution : ", conflictResult);
@@ -1097,9 +1103,9 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 					cardbookRepository.cardbookServerSyncDone[aParams.aConnection.connPrefId]++;
 					cardbookRepository.cardbookServerSyncDeletedOnServer[aParams.aConnection.connPrefId]++;
 				}
+				cardbookRepository.cardbookServerSyncHandleRemainingDone[aParams.aConnection.connPrefId]++;
 			}
 			catch (e) {}
-			cardbookRepository.cardbookServerSyncHandleRemainingDone[aParams.aConnection.connPrefId]++;
 		},
 
 		compareServerCardWithCache: function (aCardConnection, aConnection, aMode, aPrefIdType, aUrl, aEtag, aFileName) {
@@ -1147,7 +1153,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 						var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
 						var message = strBundle.formatStringFromName("cardDeletedOnDiskUpdatedOnServer", [aConnection.connDescription, myCacheCard.fn], 2);
-						var conflictResult = cardbookSynchronization.askUser(message, "keep", "delete");
+						var askUserResult = cardbookSynchronization.askUser(message, "keep", "delete");
+						var conflictResult = askUserResult.result;
 					}
 					
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug1(aConnection.connDescription + " : debug mode : conflict resolution : ", conflictResult);
@@ -1178,7 +1185,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 						var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
 						var message = strBundle.formatStringFromName("cardUpdatedOnBoth", [aConnection.connDescription, myCacheCard.fn], 2);
-						var conflictResult = cardbookSynchronization.askUser(message, "local", "remote", "merge");
+						var askUserResult = cardbookSynchronization.askUser(message, "local", "remote", "merge");
+						var conflictResult = askUserResult.result;
 					}
 					
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug1(aConnection.connDescription + " : debug mode : conflict resolution : ", conflictResult);
@@ -2237,6 +2245,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 							cardbookRepository.cardbookServerSyncTotal[aParams.aPrefId]++;
 						}
 					}
+					cardbookRepository.importConflictChoicePersist = false;
+					cardbookRepository.importConflictChoice = "write";
 					for (let i = 0; i < fileContentArrayLength; i++) {
 						if (fileContentArray[i] == "BEGIN:VCARD") {
 							cardContent = fileContentArray[i];
@@ -2355,6 +2365,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						} else {
 							var start = 0;
 						}
+						cardbookRepository.importConflictChoicePersist = false;
+						cardbookRepository.importConflictChoice = "write";
 						var fileContentArrayLength = fileContentArray.length
 						cardbookRepository.cardbookServerSyncTotal[aParams.aPrefId] = fileContentArrayLength - start;
 						for (var i = start; i < fileContentArrayLength; i++) {
@@ -2409,18 +2421,19 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 			}
 		},
 
-		importCard: function (aCard, aTarget, aKeepUid, aSource) {
+		importCard: function (aCard, aTarget, aAskUser, aSource) {
 			try {
 				cardbookUtils.jsInclude(["chrome://cardbook/content/cardbookWebDAV.js", "chrome://cardbook/content/preferences/cardbookPreferences.js"]);
-				var myCurrentDirPrefId = cardbookUtils.getAccountId(aTarget);
-				let cardbookPrefService = new cardbookPreferenceService(myCurrentDirPrefId);
-				var myCurrentDirPrefIdType = cardbookPrefService.getType();
-				var myCurrentDirPrefIdName = cardbookPrefService.getName();
-				var myCurrentDirPrefIdUrl = cardbookPrefService.getUrl();
+				var myTargetPrefId = cardbookUtils.getAccountId(aTarget);
+				let cardbookPrefService = new cardbookPreferenceService(myTargetPrefId);
+				var myTargetPrefIdType = cardbookPrefService.getType();
+				var myTargetPrefIdName = cardbookPrefService.getName();
+				var myTargetPrefIdUrl = cardbookPrefService.getUrl();
 
 				var aNewCard = new cardbookCardParser();
+				var myNullCard = new cardbookCardParser();
 				cardbookUtils.cloneCard(aCard, aNewCard);
-				aNewCard.dirPrefId = myCurrentDirPrefId;
+				aNewCard.dirPrefId = myTargetPrefId;
 				var mySepPosition = aTarget.indexOf("::",0);
 				if (mySepPosition != -1) {
 					var myCategory = aTarget.substr(mySepPosition+2,aTarget.length);
@@ -2429,31 +2442,62 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 					} else {
 						aNewCard.categories = [];
 					}
+					aNewCard.categories = cardbookUtils.cleanCategories(aNewCard.categories);
 				}
-				// between accounts
-				if (myCurrentDirPrefId != aCard.dirPrefId) {
-					aNewCard.cardurl = "";
-					if (!aKeepUid) {
+
+				var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+				var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
+				if (aAskUser && !cardbookRepository.importConflictChoicePersist && cardbookRepository.cardbookCards[myTargetPrefId+"::"+aNewCard.uid]) {
+					var message = strBundle.formatStringFromName("cardAlreadyExisting", [myTargetPrefIdName, aNewCard.fn], 2);
+					var confirmMessage = strBundle.GetStringFromName("askUserPersistMessage");
+					var askUserResult = cardbookSynchronization.askUser(message, "keep", "overwrite", "duplicate", "merge", confirmMessage, false);
+					cardbookRepository.importConflictChoice = askUserResult.result;
+					cardbookRepository.importConflictChoicePersist = askUserResult.resultConfirm;
+					if (cardbookRepository.importConflictChoicePersist) {
+						cardbookUtils.notifyObservers("cardbook.importConflictChoicePersist");
+					}
+				}
+				switch (cardbookRepository.importConflictChoice) {
+					case "cancel":
+					case "keep":
+						break;
+					case "duplicate":
+						aNewCard.cardurl = "";
+						aNewCard.fn = aNewCard.fn + " " + strBundle.GetStringFromName("fnDuplicatedMessage");
 						cardbookUtils.setCardUUID(aNewCard);
-					}
-					// Existing card
-					if (cardbookRepository.cardbookCards[myCurrentDirPrefId+"::"+aNewCard.uid]) {
-						cardbookRepository.saveCard(aCard, aNewCard, aSource);
-					// New card
-					} else {
-						cardbookRepository.saveCard(aCard, aNewCard, aSource);
-					}
-				// inside same account
-				} else {
-					cardbookRepository.saveCard(aCard, aNewCard, aSource);
-					
-					// inside same account to a category
-					if (aTarget != aCard.dirPrefId) {
-						if (myCategory && myCategory != cardbookRepository.cardbookUncategorizedCards) {
-							cardbookUtils.formatStringForOutput("cardAddedToCategory", [myCurrentDirPrefIdName, aNewCard.fn, myCategory]);
-						} else {
-							cardbookUtils.formatStringForOutput("cardRemovedFromAllCategory", [myCurrentDirPrefIdName, aNewCard.fn]);
+						cardbookRepository.saveCard(myNullCard, aNewCard, aSource);
+						break;
+					case "write":
+						cardbookRepository.saveCard(myNullCard, aNewCard, aSource);
+						break;
+					case "overwrite":
+						var myTargetCard = cardbookRepository.cardbookCards[myTargetPrefId+"::"+aNewCard.uid];
+						cardbookRepository.deleteCards([myTargetCard]);
+						cardbookRepository.saveCard(myNullCard, aNewCard, aSource);
+						break;
+					case "merge":
+						var myTargetCard = cardbookRepository.cardbookCards[myTargetPrefId+"::"+aNewCard.uid];
+						var myArgs = {cardsIn: [myTargetCard, aNewCard], cardsOut: [], hideCreate: false, action: ""};
+						var myWindow = window.openDialog("chrome://cardbook/content/wdw_mergeCards.xul", "", "chrome,modal,resizable,centerscreen", myArgs);
+						if (myArgs.action == "CREATE") {
+							var myNullCard = new cardbookCardParser();
+							cardbookRepository.saveCard(myNullCard, myArgs.cardsOut[0], "cardbook.cardAddedDirect");
+							cardbookRepository.reWriteFiles([myArgs.cardsOut[0].dirPrefId]);
+						} else if (myArgs.action == "CREATEANDREPLACE") {
+							var myNullCard = new cardbookCardParser();
+							cardbookRepository.deleteCards(myArgs.cardsIn);
+							cardbookRepository.saveCard(myNullCard, myArgs.cardsOut[0], "cardbook.cardAddedDirect");
+							cardbookRepository.reWriteFiles([myArgs.cardsOut[0].dirPrefId]);
 						}
+						break;
+				}
+
+				// inside same account to a category
+				if (aTarget != aCard.dirPrefId) {
+					if (myCategory && myCategory != cardbookRepository.cardbookUncategorizedCards) {
+						cardbookUtils.formatStringForOutput("cardAddedToCategory", [myTargetPrefIdName, aNewCard.fn, myCategory]);
+					} else if (myCategory && myCategory == cardbookRepository.cardbookUncategorizedCards) {
+						cardbookUtils.formatStringForOutput("cardRemovedFromAllCategory", [myTargetPrefIdName, aNewCard.fn]);
 					}
 				}
 			}

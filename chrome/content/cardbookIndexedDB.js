@@ -127,7 +127,7 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 			cursorRequest.onsuccess = function(e) {
 				var result = e.target.result;
 				if (result) {
-					if (result.value.cacheuri == aCacheuri) {
+					if (result.value.cacheuri == aCacheuri && result.value.dirPrefId == params.aDirPrefId) {
 						cb(result.value, params);
 					}
 					result.continue();

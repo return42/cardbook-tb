@@ -117,6 +117,11 @@ var cardbookRepository = {
 	// used to ensure that the initial load is done only once
 	firstLoad : false,
 
+	// used to remember the choice of overriding or not cards
+	// while importing, dragging, copying or duplicating
+	importConflictChoice : "",
+	importConflictChoicePersist : false,
+
 	cardbookDynamicCssRules : {},
 
 	cardbookUncategorizedCards : "",
@@ -593,6 +598,7 @@ var cardbookRepository = {
 			cardbookSynchronization.cachePutMediaCard(aCard, "sound", myDirPrefIdType);
 
 			if (myDirPrefIdType === "DIRECTORY") {
+				aCard.cacheuri = aFileName;
 				var myFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 				myFile.initWithPath(myDirPrefIdUrl);
 				myFile.append(aFileName);
@@ -1105,7 +1111,9 @@ var cardbookRepository = {
 				cardbookUtils.notifyObservers(aSource, "cardid:" + aNewCard.dirPrefId + "::" + aNewCard.uid);
 			// New card
 			} else {
-				cardbookUtils.setCardUUID(aNewCard);
+				if (aNewCard.uid == "") {
+					cardbookUtils.setCardUUID(aNewCard);
+				}
 				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 					cardbookUtils.nullifyTagModification(aNewCard);
 					cardbookUtils.nullifyEtag(aNewCard);

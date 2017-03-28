@@ -418,14 +418,15 @@ if ("undefined" == typeof(wdw_cardbook)) {
 				listOfSelectedCard = cardbookUtils.getCardsFromCards();
 				var listOfFileToRewrite = [];
 
-				for (var i = 0; i < listOfSelectedCard.length; i++) {
-					var myNullCard = new cardbookCardParser();
-					var myOutCard = new cardbookCardParser();
-					cardbookUtils.cloneCard(listOfSelectedCard[i], myOutCard);
-					myOutCard.uid = "";
-					myOutCard.cardurl = "";
-					cardbookRepository.saveCard(myNullCard, myOutCard, "cardbook.cardAddedDirect");
-					listOfFileToRewrite.push(myOutCard.dirPrefId);
+				cardbookRepository.importConflictChoice = "duplicate";
+				cardbookRepository.importConflictChoicePersist = true;
+				var dataLength = listOfSelectedCard.length;
+				for (var i = 0; i < dataLength; i++) {
+					if (i == dataLength - 1) {
+						cardbookSynchronization.importCard(listOfSelectedCard[i], listOfSelectedCard[i].dirPrefId, false, "cardbook.cardAddedDirect");
+					} else {
+						cardbookSynchronization.importCard(listOfSelectedCard[i], listOfSelectedCard[i].dirPrefId, false);
+					}
 				}
 				cardbookRepository.reWriteFiles(listOfFileToRewrite);
 			}
@@ -714,7 +715,7 @@ if ("undefined" == typeof(wdw_cardbook)) {
 						if (cardsCount > 1) {
 							wdw_cardbook.cutAndPaste = strBundle.getFormattedString("movedCardsDeletionConfirmMessage", [cardsCount]);
 						} else {
-							wdw_cardbook.cutAndPaste = strBundle.GetStringFromName("movedCardDeletionConfirmMessage");
+							wdw_cardbook.cutAndPaste = strBundle.getString("movedCardDeletionConfirmMessage");
 						}
 					} else {
 						wdw_cardbook.cutAndPaste = "";
@@ -744,12 +745,21 @@ if ("undefined" == typeof(wdw_cardbook)) {
 						for (var i = 0; i < dataLength; i++) {
 							if (cardbookRepository.cardbookCards[dataArray[i]]) {
 								var myCard = cardbookRepository.cardbookCards[dataArray[i]];
+								if (myDirPrefId == myCard.dirPrefId) {
+									cardbookRepository.importConflictChoicePersist = true;
+									cardbookRepository.importConflictChoice = "duplicate";
+									var askUser = false;
+								} else {
+									cardbookRepository.importConflictChoicePersist = false;
+									cardbookRepository.importConflictChoice = "overwrite";
+									var askUser = true;
+								}
 								// performance reason
 								// update the UI only at the end
 								if (i == dataLength - 1) {
-									cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardPasted");
+									cardbookSynchronization.importCard(myCard, myTarget, askUser, "cardbook.cardPasted");
 								} else {
-									cardbookSynchronization.importCard(myCard, myTarget, false);
+									cardbookSynchronization.importCard(myCard, myTarget, askUser);
 								}
 								myListOfCard.push(myCard);
 							} else {
@@ -1283,12 +1293,21 @@ if ("undefined" == typeof(wdw_cardbook)) {
 							for (var i = 0; i < dataLength; i++) {
 								if (cardbookRepository.cardbookCards[dataArray[i]]) {
 									var myCard = cardbookRepository.cardbookCards[dataArray[i]];
+									if (myDirPrefId == myCard.dirPrefId) {
+										cardbookRepository.importConflictChoicePersist = true;
+										cardbookRepository.importConflictChoice = "duplicate";
+										var askUser = false;
+									} else {
+										cardbookRepository.importConflictChoicePersist = false;
+										cardbookRepository.importConflictChoice = "overwrite";
+										var askUser = true;
+									}
 									// performance reason
 									// update the UI only at the end
 									if (i == dataLength - 1) {
-										cardbookSynchronization.importCard(myCard, myTarget, false, "cardbook.cardDragged");
+										cardbookSynchronization.importCard(myCard, myTarget, askUser, "cardbook.cardDragged");
 									} else {
-										cardbookSynchronization.importCard(myCard, myTarget, false);
+										cardbookSynchronization.importCard(myCard, myTarget, askUser);
 									}
 								} else {
 									cardbookUtils.formatStringForOutput("draggableWrong");

@@ -28,6 +28,13 @@
 			<button id="askUserButton1" oncommand="wdw_cardbookAskUser.fireButton(this);"/>
 			<button id="askUserButton2" oncommand="wdw_cardbookAskUser.fireButton(this);"/>
 			<button id="askUserButton3" oncommand="wdw_cardbookAskUser.fireButton(this);"/>
+			<button id="askUserButton4" oncommand="wdw_cardbookAskUser.fireButton(this);"/>
 		</hbox>
 	</vbox>
+
+	<hbox flex="1" align="center">
+		<vbox flex="1" align="center">
+			<checkbox id="confirmCheckBox" flex="1"/>
+		</vbox>
+	</hbox>
 </window>

@@ -1,0 +1,7 @@
+<!ENTITY wdw_logEditionTitle "Naplómegjelenítő">
+
+<!ENTITY logEditionValueLabel "Időbélyeg esemény">
+<!ENTITY logEditionTypeLabel "Típus">
+<!ENTITY flushLogEditionLabel "Töröl">
+<!ENTITY clipboardLogEditionLabel "Másolja a vágólapra">
+<!ENTITY cancelLogEditionLabel "Rendben">

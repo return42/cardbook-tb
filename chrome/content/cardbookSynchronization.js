@@ -611,6 +611,8 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 			}
 			catch(e) {
 				wdw_cardbooklog.updateStatusProgressInformation("cardbookSynchronization.cachePutMediaCard error : " + e, "Error");
+				wdw_cardbooklog.updateStatusProgressInformation("cardbookSynchronization.cachePutMediaCard aPrefIdType : " + aPrefIdType, "Error");
+				wdw_cardbooklog.updateStatusProgressInformation("cardbookSynchronization.cachePutMediaCard aCard : " + aCard.toSource(), "Error");
 			}
 		},
 
@@ -736,9 +738,9 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 							if (e.message == "") {
 								var stringBundleService = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 								var strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
-								cardbookUtils.formatStringForOutput("parsingCardError", [aParams.aPrefIdName, strBundle.GetStringFromName(e.code), cardContent], "Error");
+								cardbookUtils.formatStringForOutput("parsingCardError", [aConnection.connDescription, strBundle.GetStringFromName(e.code), response], "Error");
 							} else {
-								cardbookUtils.formatStringForOutput("parsingCardError", [aParams.aPrefIdName, e.message, cardContent], "Error");
+								cardbookUtils.formatStringForOutput("parsingCardError", [aConnection.connDescription, e.message, response], "Error");
 							}
 							return;
 						}
@@ -1995,12 +1997,11 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 							}
 							if (request == response) {
 								cardbookSynchronization.finishSync(aPrefId, aPrefName, myPrefIdType);
+								cardbookSynchronization.finishMultipleOperations(aPrefId);
 								if (cardbookRepository.cardbookServerSyncAgain[aPrefId]) {
-									cardbookSynchronization.finishMultipleOperations(aPrefId);
 									cardbookUtils.formatStringForOutput("synchroForcedToResync", [aPrefName]);
 									cardbookSynchronization.syncAccount(aPrefId);
 								} else {
-									cardbookSynchronization.finishMultipleOperations(aPrefId);
 									var total = cardbookSynchronization.getRequest() + cardbookSynchronization.getTotal() + cardbookSynchronization.getResponse() + cardbookSynchronization.getDone();
 									if (total === 0) {
 										cardbookRepository.cardbookSyncMode = "NOSYNC";
@@ -2441,7 +2442,7 @@ if ("undefined" == typeof(cardbookSynchronization)) {
 						for (var j = 0; j < myArgs.template.length; j++) {
 							if (myArgs.template[j][0] == "categories.0.array") {
 								var tmpValue = cardbookUtils.getCardValueByField(aListofCard[i], myArgs.template[j][0]);
-								tmpValue = cardbookUtils.unescapeArrayComma1(cardbookUtils.escapeArrayComma(tmpValue)).join(",");
+								tmpValue = cardbookUtils.unescapeArrayComma(cardbookUtils.escapeArrayComma(tmpValue)).join(",");
 							} else {
 								var tmpValue = cardbookUtils.getCardValueByField(aListofCard[i], myArgs.template[j][0]).join("\r\n");
 							}

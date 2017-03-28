@@ -1,0 +1,26 @@
+<!ENTITY settingsTitlelabel "Nyomtatási beállítások">
+<!ENTITY titleLabel "Cím:">
+<!ENTITY titleAccesskey "C">
+<!ENTITY whatToPrintGroupboxLabel "Helyszíni beállítások">
+<!ENTITY displayHeadersLabel "Címek megjelenítése">
+<!ENTITY displayHeadersAccesskey "C">
+<!ENTITY displayLabel "Megjelenítendő név">
+<!ENTITY displayAccesskey "M">
+<!ENTITY personalLabel "Személyes adat">
+<!ENTITY personalAccesskey "a">
+<!ENTITY orgLabel "Szakmai profil">
+<!ENTITY orgAccesskey "p">
+<!ENTITY categoriesLabel "Kategóriák">
+<!ENTITY categoriesAccesskey "K">
+<!ENTITY adrLabel "Címek">
+<!ENTITY adrAccesskey "M">
+<!ENTITY telLabel "Telefonszámok">
+<!ENTITY telAccesskey "T">
+<!ENTITY emailLabel "Email címek">
+<!ENTITY emailAccesskey "E">
+<!ENTITY imppLabel "Internetes kommunikáció">
+<!ENTITY imppAccesskey "I">
+<!ENTITY urlLabel "Webcímek">
+<!ENTITY urlAccesskey "W">
+<!ENTITY noteLabel "Jegyzetek">
+<!ENTITY noteAccesskey "J">

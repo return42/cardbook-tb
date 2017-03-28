@@ -114,6 +114,7 @@ cardbookCardParser.prototype = {
 			// 3.0
 			// FROM : PHOTO;ENCODING=b;TYPE=image/jpeg:R0lGODlhCw...
 			// FROM : PHOTO;X-ABCROP-RECTANGLE=ABClipRect_1&0&0&583&583&AbGQEWkRV74gSDvD5j4+wg==;VALUE=uri:https://p44-contacts.icloud.com:443/10151953909/wbs/01a57d0472c3cf027a6d20bb7d690688f17da8fb13
+			// FROM : PHOTO;ENCODING=B;TYPE=JPEG;VALUE=BINARY:/9j/4AAQSkZ
 			// 3.0 and 4.0
 			// FROM : PHOTO:http://www.example.com/pub/photos/jqpublic.gif
 			var localDelim1 = aString.indexOf(":",0);
@@ -126,7 +127,7 @@ cardbookCardParser.prototype = {
 					this[aField].localURI = trailerTmp;
 					var myFileArray = trailerTmp.split(".");
 					this[aField].extension = myFileArray[myFileArray.length-1];
-				} else if ((trailerTmp.indexOf("http") >= 0) || (trailerTmp.indexOf("file") >= 0)) {
+				} else if ((trailerTmp.search(/^http/i) >= 0) || (trailerTmp.search(/^file/i) >= 0)) {
 					this[aField].URI = trailerTmp;
 					var myFileArray = trailerTmp.split(".");
 					this[aField].extension = myFileArray[myFileArray.length-1];
@@ -211,6 +212,8 @@ cardbookCardParser.prototype = {
 					if (localDelim1 >= 0) {
 						vCardDataArrayHeader = vCardDataArray[vCardDataArrayIndex].substr(0,localDelim1);
 						vCardDataArrayTrailer = vCardDataArray[vCardDataArrayIndex].substr(localDelim1+1,vCardDataArray[vCardDataArrayIndex].length);
+						// for Google 
+						vCardDataArrayTrailer = vCardDataArrayTrailer.replace(/\\:/g, ":");
 						localDelim2 = vCardDataArrayHeader.indexOf(";",0);
 						if (localDelim2 >= 0) {
 							vCardDataArrayHeaderKey = vCardDataArrayHeader.substr(0,localDelim2).toUpperCase();
@@ -304,29 +307,15 @@ cardbookCardParser.prototype = {
 								this.email.push([cardbookUtils.unescapeArray(vCardDataArrayTrailerArray), vCardDataArrayHeaderOptionArray, this.pgname, []]);
 							}
 							break;
-						case "MAILER":
-							this.mailer = vCardDataArrayTrailer;
-							break;
-						case "TZ":
-							this.tz = vCardDataArrayTrailer;
-							break;
-						case "GEO":
-							this.geo = vCardDataArrayTrailer;
-							break;
 						case "TITLE":
 							this.title = cardbookUtils.unescapeString(vCardDataArrayTrailer);
 							break;
 						case "ROLE":
 							this.role = cardbookUtils.unescapeString(vCardDataArrayTrailer);
 							break;
-						case "AGENT":
-							this.agent = vCardDataArrayHeaderOption + ":" + vCardDataArrayTrailer;
-							break;
 						case "ORG":
 							if (vCardDataArrayTrailer != ";") {
-								vCardDataArrayTrailer = cardbookUtils.escapeString(vCardDataArrayTrailer);
-								vCardDataArrayTrailer = vCardDataArrayTrailer.replace(/;+$/, "")
-								this.org = cardbookUtils.unescapeString(vCardDataArrayTrailer);
+								this.org = vCardDataArrayTrailer.replace(/;+$/, "").replace(/\\+$/, "");
 							}
 							break;
 						case "CATEGORIES":
@@ -380,6 +369,18 @@ cardbookCardParser.prototype = {
 							break;
 						case "GENDER":
 							this.gender = vCardDataArrayTrailer;
+							break;
+						case "MAILER":
+							this.mailer = vCardDataArrayTrailer;
+							break;
+						case "TZ":
+							this.tz = vCardDataArrayTrailer;
+							break;
+						case "GEO":
+							this.geo = vCardDataArrayTrailer;
+							break;
+						case "AGENT":
+							this.agent = vCardDataArrayHeaderOption + ":" + vCardDataArrayTrailer;
 							break;
 						case "IMPP":
 							if (vCardDataArrayTrailer != null && vCardDataArrayTrailer !== undefined && vCardDataArrayTrailer != "") {

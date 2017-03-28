@@ -262,6 +262,7 @@ if ("undefined" == typeof(wdw_cardbookConfiguration)) {
 						myCard.emails = cardbookUtils.getEmailsFromCard(myCard, myNewCheck);
 					}
 				}
+				cardbookRepository.preferEmailPref = myNewCheck;
 			}
 		},
 

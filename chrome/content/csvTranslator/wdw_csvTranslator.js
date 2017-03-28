@@ -199,7 +199,7 @@ if ("undefined" == typeof(wdw_csvTranslator)) {
 			wdw_csvTranslator.setSyncControl();
 
 			var strBundle = document.getElementById("cardbook-strings");
-			document.title = strBundle.getString(window.arguments[0].mode + "MappingTittle");
+			document.title = strBundle.getString(window.arguments[0].mode + "MappingTitle");
 			document.getElementById('availableColumnsGroupboxLabel').label = strBundle.getString(window.arguments[0].mode + "availableColumnsGroupboxLabel");
 			document.getElementById('addedColumnsGroupboxLabel').label = strBundle.getString(window.arguments[0].mode + "addedColumnsGroupboxLabel");
 			document.getElementById('columnSeparatorLabel').value = strBundle.getString("columnSeparatorLabel");

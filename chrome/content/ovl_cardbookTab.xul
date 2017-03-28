@@ -278,13 +278,6 @@
 														</hbox>
 													</groupbox>
 												</hbox>
-												<groupbox id="categoriesGroupbox" flex="1">
-													<caption label="&categoriesGroupboxLabel;" class="header"/>
-													<hbox flex="1">
-														<image id="dummyCatPrefBox" class="cardbookNotPrefClass"/>
-														<textbox id="categoriesTextBox" flex="1"/>
-													</hbox>
-												</groupbox>
 											</vbox>
 											<vbox align="center" width="170px">
 												<hbox id="imageBox" align="center" height="170px">
@@ -303,6 +296,13 @@
 														<column flex="1"/>
 													</columns>
 													<rows>
+														<groupbox id="categoriesGroupbox" flex="1">
+															<caption label="&categoriesGroupboxLabel;" class="header"/>
+															<hbox flex="1">
+																<image id="dummyCatPrefBox" class="cardbookNotPrefClass"/>
+																<textbox id="categoriesTextBox" flex="1"/>
+															</hbox>
+														</groupbox>
 														<groupbox id="emailGroupbox" flex="1"/>
 														<groupbox id="telGroupbox" flex="1"/>
 														<groupbox id="adrGroupbox" flex="1"/>

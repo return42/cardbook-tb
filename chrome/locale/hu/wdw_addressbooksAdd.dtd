@@ -1,0 +1,59 @@
+<!ENTITY wizard.title "Új névjegytár mappa">
+<!ENTITY wizard.label "Új névjegytár mappa">
+
+<!ENTITY welcomePage.wizard.description "Üdvözöljük!">
+<!ENTITY welcomePage.description "Úgy tűnik, hogy ez az első alkalom hogy használod a névjegyzék programmot, így megpróbáljuk bemásolni az adataid a címjegyzékről.">
+
+<!ENTITY initialpage.wizard.description "Névjegytár mappa típus.">
+<!ENTITY initialpage.description "Névjegytár mappa típus:">
+<!ENTITY initialpage.computer.label "Helyi">
+<!ENTITY initialpage.network.label "Távoli">
+<!ENTITY initialpage.search.label "Mentett kérése">
+
+<!ENTITY locationComputerPage.wizard.description "Helyi névjegytár mappaformátum és tárolási hely.">
+<!ENTITY locationComputerPage.type.description "Válassza ki a helyi névjegytár mappaformátum:">
+<!ENTITY locationComputerPage.type.label "Mappaformátum">
+<!ENTITY locationComputerPage.createDirectory.label "Új névjegytár mappa létrehozása (könyvtár)">
+<!ENTITY locationComputerPage.createFile.label "Új névjegytár mappa létrehozása (fájl)">
+<!ENTITY locationComputerPage.openDirectory.label "Meglévő névjegytár mappa megnyitása (könyvtár)">
+<!ENTITY locationComputerPage.openFile.label "Meglévő névjegytár mappa megnyitása (fájl)">
+<!ENTITY locationComputerPage.standard.label "Bemásolni az adataid a Thunderbird címjegyzékről (könyvtár)">
+<!ENTITY locationComputerPage.uri.label "Könyvtár vagy fájl">
+<!ENTITY locationComputerPage.uri.description "Kattintson a „Tallózás...” gombra, választ ki a tárolási hely az Ön új névjegytár mappára. Ha új fájl, mellékel „.vcf”">
+<!ENTITY locationFirstPage.uri.description "Válaszd ki a tárolási helyet az új helyi névjegytár mappának.">
+<!ENTITY locationComputerPage.uributton.label "Tallózás...">
+
+<!ENTITY locationNetworkPage.wizard.description "Távoli névjegytár mappaformátum és tárolási hely.">
+<!ENTITY locationNetworkPage.description "Válassza ki a távoli névjegytár mappaformátum: (Vigyázat: Google végrehajtása a vCard formátum hibás.)">
+<!ENTITY locationNetworkPage.type.label "Mappaformátum">
+<!ENTITY locationNetworkPage.carddav.label "CardDAV">
+<!ENTITY locationNetworkPage.google.label "Google">
+<!ENTITY locationNetworkPage.apple.label "Apple">
+<!ENTITY locationNetworkPage.connection.label "Kapcsolat">
+<!ENTITY locationNetworkPage.uri.description "CardDAV-re, írjál be a távoli névjegytár mappa webcímet. Megpróbálja használni részleges webcímet (például http(s)://carddav.például.hu). Google névjegytár: hagyja üresen a mezőt.">
+<!ENTITY locationNetworkPage.uri.label "Webcím">
+<!ENTITY locationNetworkPage.credentials.description "Írja be a hitelesítő adatok hozzáférését a névjegytár. Google névjegytár: Google e-mailcím a felhasználónév.">
+<!ENTITY locationNetworkPage.validatebutton.label "Érvényesít">
+
+<!ENTITY locationSearchPage.wizard.description "Mentett keresés meghatározása.">
+<!ENTITY locationSearchPage.label "Mentett keresés">
+
+<!ENTITY googleOauthPage.wizard.description "Google hitelesítés">
+
+<!ENTITY namePage.wizard.description "Névjegytár mappa tulajdonságok">
+<!ENTITY namePage.selected.label "Kiválasztott">
+<!ENTITY namePage.name.label "Név">
+<!ENTITY namePage.color.label "Szín">
+<!ENTITY namePage.urnuuid.label "Használ urn:uuid">
+<!ENTITY namePage.readonly.label "Mód: csak olvasható">
+<!ENTITY namePage.vCardVersion.label "vCard">
+
+<!ENTITY namesPage.wizard.description "Névjegytár mappák tulajdonságok">
+<!ENTITY namesPage.name.label "Nevek">
+<!ENTITY namesPage.name.description "Felfedeztuk több névjegytár mappák. Válassza ki a nevek, a névjegytár amit szeretné megnyitni:">
+
+<!ENTITY finishPage.wizard.description "Névjegytár mappa beállítva">
+<!ENTITY finishPage.description "Az új névjegytár mappa sikeresen beállítva.">
+
+<!ENTITY finishsPage.wizard.description "Névjegytár mappák beállítva">
+<!ENTITY finishsPage.description "Az új névjegytár mappák sikeresen beállítva.">

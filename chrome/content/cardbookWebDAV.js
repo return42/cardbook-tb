@@ -240,14 +240,16 @@ cardbookWebDAV.prototype = {
 			
 			// Print SSL certificate details
 			if (secInfo instanceof Components.interfaces.nsISSLStatusProvider) {
-				var cert = secInfo.QueryInterface(Components.interfaces.nsISSLStatusProvider).SSLStatus.QueryInterface(Components.interfaces.nsISSLStatus).serverCert;
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Common name (CN) : " + cert.commonName);
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Issuer : " + cert.issuerOrganization);
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Organisation : " + cert.organization);
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : SHA1 fingerprint : " + cert.sha1Fingerprint);
-				var validity = cert.validity.QueryInterface(Components.interfaces.nsIX509CertValidity);
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Valid from " + validity.notBeforeGMT);
-				wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Valid until " + validity.notAfterGMT);
+				if (secInfo.QueryInterface(Components.interfaces.nsISSLStatusProvider).SSLStatus) {
+					var cert = secInfo.QueryInterface(Components.interfaces.nsISSLStatusProvider).SSLStatus.QueryInterface(Components.interfaces.nsISSLStatus).serverCert;
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Common name (CN) : " + cert.commonName);
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Issuer : " + cert.issuerOrganization);
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Organisation : " + cert.organization);
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : SHA1 fingerprint : " + cert.sha1Fingerprint);
+					var validity = cert.validity.QueryInterface(Components.interfaces.nsIX509CertValidity);
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Valid from " + validity.notBeforeGMT);
+					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(this.logDescription + " : debug mode : Valid until " + validity.notAfterGMT);
+				}
 			}
 		}
 		catch(e) {

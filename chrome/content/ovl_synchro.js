@@ -7,6 +7,8 @@ if ("undefined" == typeof(ovl_synchro)) {
 			let strBundle = stringBundleService.createBundle("chrome://cardbook/locale/cardbook.properties");
 			cardbookRepository.cardbookUncategorizedCards = strBundle.GetStringFromName("uncategorizedCards");
 			cardbookRepository.cardbookCollectedCards = strBundle.GetStringFromName("collectedCards");
+			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+			cardbookRepository.preferEmailPref = prefs.getBoolPref("extensions.cardbook.preferEmailPref");
 
 			cardbookRepository.setSolveConflicts();
 			cardbookRepository.setTypes();

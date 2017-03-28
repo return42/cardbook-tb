@@ -1712,7 +1712,7 @@ if ("undefined" == typeof(wdw_cardbook)) {
 			}
 			wdw_cardbook.loadCssRules();
 			if (aValue) {
-				cardbookSynchronization.loadAccount(aDirPrefId, true, false, "WINDOW");
+				cardbookSynchronization.loadAccount(aDirPrefId, true, false, "INITIAL");
 				cardbookUtils.formatStringForOutput("addressbookEnabled", [myDirPrefIdName]);
 				wdw_cardbooklog.addActivity("addressbookEnabled", [myDirPrefIdName], "editItem");
 				cardbookUtils.notifyObservers("cardbook.ABModifiedDirect", "accountid:" + aDirPrefId);

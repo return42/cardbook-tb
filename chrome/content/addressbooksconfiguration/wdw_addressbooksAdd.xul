@@ -144,7 +144,7 @@
 				<columns>
 					<column/>
 					<column flex="1"/>
-					<column/>
+					<column flex="1"/>
 				</columns>
 				<rows>
 					<description>&locationNetworkPage.uri.description;</description>

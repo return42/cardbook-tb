@@ -17,6 +17,8 @@ var cardbookRepository = {
 
 	dateFormats : ["YYYY-MM-DD", "YYYY.MM.DD", "YYYY/MM/DD", "YYYYMMDD", "DD-MM-YYYY", "DD.MM.YYYY", "DD/MM/YYYY", "DDMMYYYY", "MM-DD-YYYY", "MM.DD.YYYY", "MM/DD/YYYY", "MMDDYYYY"],
 
+	preferEmailPref : true,
+	
 	cardbookAccounts : [],
 	cardbookAccountsCategories : {},
 	cardbookCards : {},

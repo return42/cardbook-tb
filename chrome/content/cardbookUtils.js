@@ -273,23 +273,12 @@ if ("undefined" == typeof(cardbookUtils)) {
 			return vArrayNew;
 		},
 	
-		unescapeArrayComma1: function (vArray) {
+		unescapeArrayComma: function (vArray) {
 			vArrayNew = [];
 			vArrayNew = JSON.parse(JSON.stringify(vArray));
 			for (let i = 0; i<vArrayNew.length; i++){
 				if (vArrayNew[i] && vArrayNew[i] != ""){
 					vArrayNew[i] = vArrayNew[i].replace(/@ESCAPEDCOMMA@/g,"\\,");
-				}
-			}
-			return vArrayNew;
-		},
-	
-		unescapeArrayComma2: function (vArray) {
-			vArrayNew = [];
-			vArrayNew = JSON.parse(JSON.stringify(vArray));
-			for (let i = 0; i<vArrayNew.length; i++){
-				if (vArrayNew[i] && vArrayNew[i] != ""){
-					vArrayNew[i] = vArrayNew[i].replace(/@ESCAPEDCOMMA@/g,"\,");
 				}
 			}
 			return vArrayNew;
@@ -366,7 +355,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 			vCardData = this.appendToVcardData2(vCardData,"VERSION",false,vCard.version);
 			vCardData = this.appendToVcardData2(vCardData,"PRODID",false,vCard.prodid);
 			vCardData = this.appendToVcardData2(vCardData,"UID",false,vCard.uid);
-			vCardData = this.appendToVcardData2(vCardData,"CATEGORIES",false,this.unescapeArrayComma1(this.escapeArrayComma(vCard.categories)).join(","));
+			vCardData = this.appendToVcardData2(vCardData,"CATEGORIES",false,this.unescapeArrayComma(this.escapeArrayComma(vCard.categories)).join(","));
 			if (vCard.version == "3.0") {
 				vCardData = this.appendToVcardData2(vCardData,"N",false,this.escapeStrings(vCard.lastname) + ";" + this.escapeStrings(vCard.firstname) + ";" +
 														this.escapeStrings(vCard.othername) + ";" + this.escapeStrings(vCard.prefixname) + ";" + this.escapeStrings(vCard.suffixname));
@@ -381,7 +370,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 			vCardData = this.appendToVcardData2(vCardData,"BDAY",false,vCard.bday);
 			vCardData = this.appendToVcardData2(vCardData,"TITLE",false,this.escapeStrings(vCard.title));
 			vCardData = this.appendToVcardData2(vCardData,"ROLE",false,this.escapeStrings(vCard.role));
-			vCardData = this.appendToVcardData2(vCardData,"ORG",false,this.escapeStrings(vCard.org));
+			vCardData = this.appendToVcardData2(vCardData,"ORG",false,vCard.org);
 			vCardData = this.appendToVcardData2(vCardData,"CLASS",false,vCard.class1);
 			vCardData = this.appendToVcardData2(vCardData,"REV",false,vCard.rev);
 
@@ -905,8 +894,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 			aCard.dispcategories = aCard.categories.join(" ");
 			aCard.isAList = cardbookUtils.isMyCardAList(aCard);
 			if (!aCard.isAList) {
-				var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-				aCard.emails = cardbookUtils.getEmailsFromCard(aCard, prefs.getBoolPref("extensions.cardbook.preferEmailPref"));
+				aCard.emails = cardbookUtils.getEmailsFromCard(aCard, cardbookRepository.preferEmailPref);
 			}
 		},
 

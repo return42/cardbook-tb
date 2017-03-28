@@ -1771,18 +1771,19 @@ if ("undefined" == typeof(cardbookUtils)) {
 			} else if (aPrefIdType === "DIRECTORY") {
 				var cardbookPrefService = new cardbookPreferenceService(aCard.dirPrefId);
 				var myDirPrefIdUrl = cardbookPrefService.getUrl();
-				return cardbookUtils.getFileNameForCard(myDirPrefIdUrl, aCard.fn, aCard.uid);
+				aCard.cacheuri = cardbookUtils.getFileNameForCard(myDirPrefIdUrl, aCard.fn, aCard.uid);
 			} else {
 				if (aCard.cardurl != null && aCard.cardurl !== undefined && aCard.cardurl != "") {
-					return cardbookUtils.getFileNameFromUrl(aCard.cardurl);
+					aCard.cacheuri = cardbookUtils.getFileNameFromUrl(aCard.cardurl);
 				} else {
 					if (aPrefIdType === "GOOGLE") {
-						return cardbookUtils.getFileNameFromUrl(aCard.uid);
+						aCard.cacheuri = cardbookUtils.getFileNameFromUrl(aCard.uid);
 					} else {
-						return cardbookUtils.getFileNameFromUrl(aCard.uid) + ".vcf";
+						aCard.cacheuri = cardbookUtils.getFileNameFromUrl(aCard.uid) + ".vcf";
 					}
 				}
 			}
+			return aCard.cacheuri;
 		},
 
 		randomChannel: function(brightness) {

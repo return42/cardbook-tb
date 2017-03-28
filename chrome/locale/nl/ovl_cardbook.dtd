@@ -27,6 +27,9 @@
 <!ENTITY findEventsFromEmailMessengerLabel "Zoek agenda-gebeurtenissen gerelateerd aan dit e-mail adres">
 <!ENTITY findEventsFromEmailMessengerAccesskey "a">
 
+<!ENTITY mailContext-addToCardBookMenuLabel "Toevoegen aan CardBook...">
+<!ENTITY mailContext-addToCardBookMenuAccesskey "o">
+
 <!ENTITY addAllAttachementsToCardBookMenuLabel "Alle toevoegen aan CardBook...">
 <!ENTITY addAttachementToCardBookMenuLabel "Toevoegen aan CardBook...">
 

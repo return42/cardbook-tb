@@ -27,6 +27,9 @@
 <!ENTITY findEventsFromEmailMessengerLabel "Find calendar events related to this email address">
 <!ENTITY findEventsFromEmailMessengerAccesskey "e">
 
+<!ENTITY mailContext-addToCardBookMenuLabel "Add CardBook Contact...">
+<!ENTITY mailContext-addToCardBookMenuAccesskey "d">
+
 <!ENTITY addAllAttachementsToCardBookMenuLabel "To CardBook All...">
 <!ENTITY addAttachementToCardBookMenuLabel "To CardBook...">
 

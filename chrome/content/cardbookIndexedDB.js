@@ -23,6 +23,7 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 				}
 				
 				var store = db.createObjectStore("cards", {keyPath: "cbid", autoIncrement: false});
+				store.createIndex("cacheuriIndex", "cacheuri", { unique: false });
 			};
 
 			// when success, call the observer for starting the load cache and maybe the sync
@@ -100,9 +101,41 @@ if ("undefined" == typeof(cardbookIndexedDB)) {
 				var result = e.target.result;
 				if (result) {
 					cardbookRepository.addCardToRepository(result.value, myMode, result.value.cacheuri);
-					cardbookUtils.formatStringForOutput("cardLoadedFromCache", [aDirPrefName, result.value.fn]);
 					cardbookRepository.cardbookServerSyncDone[aDirPrefId]++;
 					cardbookRepository.cardbookServerSyncTotal[aDirPrefId]++;
+					cardbookUtils.formatStringForOutput("cardLoadedFromCache", [aDirPrefName, result.value.fn]);
+					result.continue();
+				}
+			};
+			
+			cursorRequest.onerror = function(e) {
+				cardbookRepository.cardbookDatabase.onerror();
+			};
+		},
+
+		// once the DB is open, this is the second step for the AB
+		// which use the DB caching
+		getItemByCacheuri: function (aWrongCacheuri, aCallback, aParams) {
+			var mySepPosition = aWrongCacheuri.indexOf("::",0);
+			if (mySepPosition != -1) {
+				var cacheuri = aWrongCacheuri.substr(0, mySepPosition);
+			} else {
+				var cacheuri = aWrongCacheuri;
+			}
+			var cb = aCallback;
+			var params = aParams;
+			var db = cardbookRepository.cardbookDatabase.db;
+			var transaction = db.transaction(["cards"], "readonly");
+			var store = transaction.objectStore("cards");
+			var keyRange = IDBKeyRange.bound(cacheuri, cacheuri + '\uffff');
+			var cursorRequest = store.index('cacheuriIndex').openCursor(keyRange);
+		
+			cursorRequest.onsuccess = function(e) {
+				var result = e.target.result;
+				if (result) {
+					if (result.value.cacheuri+"::"+result.value.dirPrefId == aWrongCacheuri) {
+						cb(result.value, params);
+					}
 					result.continue();
 				}
 			};

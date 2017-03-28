@@ -27,6 +27,9 @@
 <!ENTITY findEventsFromEmailMessengerLabel "Trouver les rendez-vous de cette adresse email">
 <!ENTITY findEventsFromEmailMessengerAccesskey "a">
 
+<!ENTITY mailContext-addToCardBookMenuLabel "Ajouter à CardBook...">
+<!ENTITY mailContext-addToCardBookMenuAccesskey "j">
+
 <!ENTITY addAllAttachementsToCardBookMenuLabel "Tout dans CardBook...">
 <!ENTITY addAttachementToCardBookMenuLabel "Dans CardBook...">
 

@@ -27,6 +27,9 @@
 <!ENTITY findEventsFromEmailMessengerLabel "Najít v kalendáři události vztahující se k této e-mailové adrese">
 <!ENTITY findEventsFromEmailMessengerAccesskey "e">
 
+<!ENTITY mailContext-addToCardBookMenuLabel "Přidat do CardBooku...">
+<!ENTITY mailContext-addToCardBookMenuAccesskey "P">
+
 <!ENTITY addAllAttachementsToCardBookMenuLabel "Vše do CardBooku...">
 <!ENTITY addAttachementToCardBookMenuLabel "Do CardBooku...">
 

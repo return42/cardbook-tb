@@ -2,7 +2,7 @@ var EXPORTED_SYMBOLS = ["cardbookRepository"];
 
 var cardbookRepository = {
 	cardbookDatabase : {},
-	cardbookDatabaseVersion : "5",
+	cardbookDatabaseVersion : "6",
 	cardbookDatabaseName : "CardBook",
 	
 	LIGHTNING_ID : "{e2fda1a4-762b-4020-b5ad-a41df1933103}",
@@ -40,7 +40,8 @@ var cardbookRepository = {
 	cardbookFileResponse : {},
 	cardbookDBRequest : {},
 	cardbookDBResponse : {},
-
+	filesFromCacheDB : {},
+	
 	cardbookServerValidation : {},
 
 	cardbookGoogleAccessTokenRequest : {},
@@ -654,6 +655,9 @@ var cardbookRepository = {
 				return;
 			} else if (myDirPrefIdType === "GOOGLE" || myDirPrefIdType === "APPLE" || myDirPrefIdType === "CARDDAV" || myDirPrefIdType === "LOCALDB") {
 				cardbookIndexedDB.removeItem(myDirPrefIdName, aCard);
+				if (cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId]) {
+					delete cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId];
+				}
 			} else if (myDirPrefIdType === "CACHE") {
 				var myFile = cardbookRepository.getLocalDirectory();
 				myFile.append(aCard.dirPrefId);

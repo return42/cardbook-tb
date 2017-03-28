@@ -90,8 +90,7 @@
 			command="cardbookTabButtonOpen"/>
 	</toolbar>
 
-	<menupopup id="emailAddressPopup" onpopupshowing="setupEmailAddressPopup(findEmailNodeFromPopupNode(document.popupNode, 'emailAddressPopup'));
-														goUpdateCommand('cmd_createFilterFromPopup')">
+	<menupopup id="emailAddressPopup">
 		<menuseparator id="editCardBookSeparator" insertafter="viewContactItem"/>
 		<menu id="addToCardBookMenu" label="&addToCardBookMenuLabel;" accesskey="&addToCardBookMenuAccesskey;" insertafter="editCardBookSeparator">
 			<menupopup id="addToCardBookMenuPopup" onpopupshowing="cardbookUtils.addToCardBookMenuSubMenu(this.id, ovl_cardbookMailContacts.addToCardBook)"/>
@@ -112,6 +111,12 @@
 		<menuitem id="findAllEventsFromContactMessenger" label="&findAllEventsFromContactMessengerLabel;" accesskey="&findAllEventsFromContactMessengerAccesskey;"
 			oncommand="ovl_cardbookMailContacts.findAllEventsFromContact();" insertafter="findEventsFromEmailMessenger"/>
 		<menuseparator id="findCardBookSeparator2" insertafter="findAllEventsFromContactMessenger"/>
+	</menupopup>
+
+	<menupopup id="mailContext">
+		<menu id="mailContext-addToCardBookMenu" label="&mailContext-addToCardBookMenuLabel;" accesskey="&mailContext-addToCardBookMenuAccesskey;" insertafter="mailContext-addemail">
+			<menupopup id="mailContext-addToCardBookMenuPopup" onpopupshowing="cardbookUtils.addToCardBookMenuSubMenu(this.id, ovl_cardbookMailContacts.mailContextAddToCardBook)"/>
+		</menu>
 	</menupopup>
 
 	<statusbarpanel id="totalMessageCount" onclick="wdw_cardbook.openLogEdition();"/>

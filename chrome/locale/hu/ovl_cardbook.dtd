@@ -27,6 +27,9 @@
 <!ENTITY findEventsFromEmailMessengerLabel "Eseménynaptár az email keresése">
 <!ENTITY findEventsFromEmailMessengerAccesskey "r">
 
+<!ENTITY mailContext-addToCardBookMenuLabel "Felvétel a névjegyzékbe (Névjegyzék)...">
+<!ENTITY mailContext-addToCardBookMenuAccesskey "v">
+
 <!ENTITY addAllAttachementsToCardBookMenuLabel "Összes mentése névjegyzékbe">
 <!ENTITY addAttachementToCardBookMenuLabel "Mentés névjegyzékbe">
 

@@ -89,6 +89,22 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 			}
 		},
 
+		mailContextAddToCardBook: function(aDirPrefId) {
+			try {
+				var myNewCard = new cardbookCardParser();
+				myNewCard.dirPrefId = aDirPrefId;
+				var url = gContextMenu.linkURL;
+				var myEmail = getEmail(url);
+				myNewCard.email.push([[myEmail], [], "", []]);
+				cardbookUtils.openEditionWindow(myNewCard, "AddEmail", "cardbook.cardAddedIndirect");
+			}
+			catch (e) {
+				var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService);
+				var errorTitle = "mailContextAddToCardBook";
+				prompts.alert(null, errorTitle, e);
+			}
+		},
+
 		editOrViewContact: function() {
 			var myPopupNode = document.popupNode;
 			var myEmailNode = findEmailNodeFromPopupNode(myPopupNode, 'emailAddressPopup');
@@ -214,10 +230,15 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 			var myWindow = window.openDialog("chrome://cardbook/content/lightning/wdw_cardbookEventContacts.xul", "", "chrome,modal,resizable,centerscreen", myArgs);
 		},
 
-		hideOldAddressbook: function () {
-			document.getElementById("addToAddressBookItem").setAttribute("hidden", true);
-			document.getElementById("editContactItem").setAttribute("hidden", true);
-			document.getElementById("viewContactItem").setAttribute("hidden", true);
+		hideOldAddressbook: function (aExclusive) {
+			if (aExclusive) {
+				document.getElementById("addToAddressBookItem").setAttribute("hidden", true);
+				document.getElementById("editContactItem").setAttribute("hidden", true);
+				document.getElementById("viewContactItem").setAttribute("hidden", true);
+				document.getElementById("editCardBookSeparator").setAttribute("hidden", true);
+			} else {
+				document.getElementById("editCardBookSeparator").setAttribute("hidden", false);
+			}
 		},
 		
 		hideOrShowLightningEntries: function (addon) {
@@ -275,9 +296,8 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 		// Execute some action afterwards.
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 		var exclusive = prefs.getBoolPref("extensions.cardbook.exclusive");
-		if (exclusive) {
-			ovl_cardbookMailContacts.hideOldAddressbook();
-		}
+		ovl_cardbookMailContacts.hideOldAddressbook(exclusive);
+
 		Components.utils.import("chrome://cardbook/content/cardbookRepository.js");
 		var myEmail = arguments[0].getAttribute('emailAddress');
 		var isEmailRegistered = cardbookRepository.isEmailRegistered(myEmail);
@@ -344,6 +364,32 @@ if ("undefined" == typeof(ovl_cardbookMailContacts)) {
 	// Override a function.
 	onClickEmailStar = function() {
 		return;
+	};
+
+})();
+
+// for adding a contact from an email address
+// fillMailContextMenu
+(function() {
+	// Keep a reference to the original function.
+	var _original = fillMailContextMenu;
+
+	// Override a function.
+	fillMailContextMenu = function() {
+
+		var rv = _original.apply(null, arguments);
+
+		// Execute some action afterwards.
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+		var exclusive = prefs.getBoolPref("extensions.cardbook.exclusive");
+		var event = arguments[0];
+		var gContextMenu = new nsContextMenu(event.target, event.shiftKey);
+		if (exclusive) {
+			gContextMenu.showItem("mailContext-addemail", false);
+		}
+		gContextMenu.showItem("mailContext-addToCardBookMenu", gContextMenu.onMailtoLink && !gContextMenu.inThreadPane);
+		
+		return rv;
 	};
 
 })();

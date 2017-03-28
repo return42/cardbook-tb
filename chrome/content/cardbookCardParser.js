@@ -61,6 +61,7 @@ cardbookCardParser.prototype = {
 		this.key = "";
 		this.impp = [];
 		this.others = [];
+		this.cbid = "";
 
 		this.photo = {types: [], value: "", localURI: "", URI: "", extension: ""};
 		this.logo = {types: [], value: "", localURI: "", URI: "", extension: ""};

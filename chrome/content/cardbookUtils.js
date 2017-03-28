@@ -699,7 +699,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 				}
 			}
 
-			var cardbookPrefService = new cardbookPreferenceService(aCard.dirPrefId);
+			/* var cardbookPrefService = new cardbookPreferenceService(aCard.dirPrefId);
 			var myDirPrefIdType = cardbookPrefService.getType();
 			var myDirPrefIdUrl = cardbookPrefService.getUrl();
 			if (myDirPrefIdType === "DIRECTORY") {
@@ -724,7 +724,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 						document.getElementById(fieldArray[i] + 'TextBox').removeAttribute('readonly');
 					}
 				}
-			}
+			}*/
 
 			var myCustomField1OrgValue = "";
 			var myCustomField2OrgValue = "";
@@ -894,6 +894,12 @@ if ("undefined" == typeof(cardbookUtils)) {
 			aCard.dispcategories = aCard.categories.join(" ");
 			aCard.isAList = cardbookUtils.isMyCardAList(aCard);
 			if (!aCard.isAList) {
+				aCard.emails = cardbookUtils.getEmailsFromCard(aCard, cardbookRepository.preferEmailPref);
+			}
+			if (aCard.dirPrefId != "" && aCard.uid != "") {
+				aCard.cbid = aCard.dirPrefId + "::" + aCard.uid;
+			}
+			if (aCard.dirPrefId) {
 				aCard.emails = cardbookUtils.getEmailsFromCard(aCard, cardbookRepository.preferEmailPref);
 			}
 		},
@@ -1324,7 +1330,8 @@ if ("undefined" == typeof(cardbookUtils)) {
 		isThereNetworkAccountToSync: function() {
 			for (var i = 0; i < cardbookRepository.cardbookAccounts.length; i++) {
 				if (cardbookRepository.cardbookAccounts[i][1] && cardbookRepository.cardbookAccounts[i][6] != "FILE" && cardbookRepository.cardbookAccounts[i][6] != "CACHE" 
-					&& cardbookRepository.cardbookAccounts[i][6] != "DIRECTORY" && cardbookRepository.cardbookAccounts[i][6] != "SEARCH" && cardbookRepository.cardbookAccounts[i][5]) {
+					&& cardbookRepository.cardbookAccounts[i][6] != "DIRECTORY" && cardbookRepository.cardbookAccounts[i][6] != "SEARCH" && cardbookRepository.cardbookAccounts[i][6] != "LOCALDB"
+					&& cardbookRepository.cardbookAccounts[i][5]) {
 					return true;
 				}
 			}
@@ -1424,7 +1431,7 @@ if ("undefined" == typeof(cardbookUtils)) {
 			} else {
 				var cardbookPrefService = new cardbookPreferenceService(aCard.dirPrefId);
 				var myPrefType = cardbookPrefService.getType();
-				if (myPrefType != "FILE" || myPrefType != "CACHE" || myPrefType != "DIRECTORY") {
+				if (myPrefType != "FILE" || myPrefType != "CACHE" || myPrefType != "DIRECTORY" || myPrefType != "LOCALDB") {
 					cardbookUtils.nullifyEtag(aCard);
 					aCard.others.push("X-THUNDERBIRD-ETAG:" + aEtag);
 					aCard.etag = aEtag;
@@ -2353,15 +2360,19 @@ if ("undefined" == typeof(cardbookUtils)) {
 			}
 		},
 
-		getCardUUID: function (aDirPrefId) {
+		setCardUUID: function (aCard) {
 			var result = cardbookUtils.getUUID();
-			if (aDirPrefId != null && aDirPrefId !== undefined && aDirPrefId != "") {
-				var cardbookPrefService = new cardbookPreferenceService(aDirPrefId);
+			if (aCard.dirPrefId != null && aCard.dirPrefId !== undefined && aCard.dirPrefId != "") {
+				var cardbookPrefService = new cardbookPreferenceService(aCard.dirPrefId);
 				if (cardbookPrefService.getUrnuuid()) {
-					return "urn:uuid:" + result;
+					aCard.uid = "urn:uuid:" + result;
+				} else {
+					aCard.uid = result;
 				}
+			} else {
+				aCard.uid = result;
 			}
-			return result;
+			aCard.cbid = aCard.dirPrefId + "::" + aCard.uid;
 		},
 
 		getUUID: function () {

@@ -459,10 +459,10 @@
 																<label id="cardurlLabel" value="&cardurlLabel;" control="cardurlTextBox" class="header"/>
 																<textbox id="cardurlTextBox"/>
 															</row>
-															<row id="cacheuriRow" align="center">
-																<label id="cacheuriLabel" value="&cacheuriLabel;" control="cacheuriTextBox" class="header"/>
-																<textbox id="cacheuriTextBox"/>
-															</row>
+															<!-- <row id="cacheuriRow" align="center"> -->
+																<!-- <label id="cacheuriLabel" value="&cacheuriLabel;" control="cacheuriTextBox" class="header"/> -->
+																<!-- <textbox id="cacheuriTextBox"/> -->
+															<!-- </row> -->
 															<row id="revRow" align="center">
 																<label id="revLabel" value="&revLabel;" control="revTextBox" class="header"/>
 																<textbox id="revTextBox"/>

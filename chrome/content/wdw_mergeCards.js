@@ -460,7 +460,7 @@ if ("undefined" == typeof(wdw_mergeCards)) {
 			listOfCards = window.arguments[0].cardsIn;
 			aCard.version = wdw_mergeCards.version;
 			aCard.dirPrefId = listOfCards[0].dirPrefId;
-			aCard.uid = cardbookUtils.getCardUUID(aCard.dirPrefId);
+			cardbookUtils.setCardUUID(aCard);
 			listOfFields = [ 'dirPrefId' ];
 			for (var i in listOfFields) {
 				for (var j = 0; j < listOfCards.length; j++) {

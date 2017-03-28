@@ -47,42 +47,43 @@
 	</wizardpage>
 
    <wizardpage pageid="initialPage"
-			next="locationComputerPage"
+			next="localPage"
 			label="&wizard.label;"
-			description="&initialpage.wizard.description;"
+			description="&initialPage.wizard.description;"
 			onpageshow="wdw_addressbooksAdd.checkRequired();"
 			onpageadvanced="wdw_addressbooksAdd.initialAdvance();">
-		<description>&initialpage.description;</description>
+		<description>&initialPage.description;</description>
 		<radiogroup id="addressbookType" class="indent">
-			<radio value="local" label="&initialpage.computer.label;" selected="true"/>
-			<radio value="remote" label="&initialpage.network.label;"/>
-			<radio value="search" label="&initialpage.search.label;"/>
+			<radio value="local" label="&initialPage.computer.label;" selected="true"/>
+			<radio value="remote" label="&initialPage.network.label;"/>
+			<radio value="standard" label="&initialPage.standard.label;"/>
+			<radio value="search" label="&initialPage.search.label;"/>
 		</radiogroup>
    </wizardpage>
 
-   <wizardpage pageid="locationComputerPage"
+   <wizardpage pageid="localPage"
 			next="namePage"
 			label="&wizard.label;"
-			description="&locationComputerPage.wizard.description;"
-			onpageshow="wdw_addressbooksAdd.checkRequired();"
-			onpageadvanced="wdw_addressbooksAdd.locationComputerPageTypeAdvance();">
+			description="&localPage.wizard.description;"
+			onpageshow="wdw_addressbooksAdd.localPageCheckRequired();"
+			onpageadvanced="wdw_addressbooksAdd.localPageTypeAdvance();">
 
 		<groupbox flex="1">
-			<caption label="&locationComputerPage.type.label;"/>
+			<caption label="&localPage.type.label;"/>
 			<grid flex="1">
 				<columns>
 					<column/>
 					<column flex="1"/>
 				</columns>
 				<rows>
-					<description>&locationComputerPage.type.description;</description>
+					<description>&localPage.type.description;</description>
 					<row align="center">
-						<radiogroup id="locationComputerPageType" onselect="wdw_addressbooksAdd.locationComputerPageTypeSelect();" class="indent">
-							<radio value="createDirectory" label="&locationComputerPage.createDirectory.label;" selected="true"/>
-							<radio value="createFile" label="&locationComputerPage.createFile.label;"/>
-							<radio value="openDirectory" label="&locationComputerPage.openDirectory.label;"/>
-							<radio value="openFile" label="&locationComputerPage.openFile.label;"/>
-							<radio value="standard" label="&locationComputerPage.standard.label;"/>
+						<radiogroup id="localPageType" onselect="wdw_addressbooksAdd.localPageTypeSelect();" class="indent">
+							<radio value="createDB" label="&localPage.createDB.label;" selected="true"/>
+							<radio value="createDirectory" label="&localPage.createDirectory.label;"/>
+							<radio value="createFile" label="&localPage.createFile.label;"/>
+							<radio value="openDirectory" label="&localPage.openDirectory.label;"/>
+							<radio value="openFile" label="&localPage.openFile.label;"/>
 						</radiogroup>
 					</row>
 				</rows>
@@ -90,56 +91,56 @@
 		</groupbox>
 
 		<groupbox flex="1">
-			<caption label="&locationComputerPage.uri.label;"/>
+			<caption label="&localPage.uri.label;"/>
 			<grid flex="1">
 				<columns>
 					<column/>
 					<column flex="1"/>
 				</columns>
 				<rows>
-					<description>&locationComputerPage.uri.description;</description>
+					<description>&localPage.uri.description;</description>
 					<row align="center">
-						<label value="&locationComputerPage.uri.label;" control="locationComputerPageURI"/>
-						<textbox id="locationComputerPageURI"
+						<label value="&localPage.uri.label;" control="localPageURI"/>
+						<textbox id="localPageURI"
 							required="true"
 							disabled="true"
 							oninput="wdw_addressbooksAdd.checkRequired();"/>
-						<button id="locationComputerPageURIButton" label="&locationComputerPage.uributton.label;" oncommand="wdw_addressbooksAdd.searchFile(this);"/>
+						<button id="localPageURIButton" label="&localPage.uributton.label;" oncommand="wdw_addressbooksAdd.searchFile(this);"/>
 					</row>
 				</rows>
 			</grid>
 		</groupbox>
    </wizardpage>
 
-   <wizardpage pageid="locationNetworkPage"
+   <wizardpage pageid="remotePage"
 			next="namePage"
 			label="&wizard.label;"
-			description="&locationNetworkPage.wizard.description;"
+			description="&remotePage.wizard.description;"
 			onpageshow="wdw_addressbooksAdd.checklocationNetwork();"
-			onpageadvanced="wdw_addressbooksAdd.locationNetworkPageTypeAdvance();">
+			onpageadvanced="wdw_addressbooksAdd.remotePageTypeAdvance();">
 
 		<groupbox flex="1">
-			<caption label="&locationNetworkPage.type.label;"/>
+			<caption label="&remotePage.type.label;"/>
 			<grid flex="1">
 				<columns>
 					<column/>
 					<column flex="1"/>
 				</columns>
 				<rows>
-					<description>&locationNetworkPage.description;</description>
+					<description>&remotePage.description;</description>
 					<row align="center">
-						<radiogroup id="locationNetworkPageType" onselect="wdw_addressbooksAdd.locationNetworkPageTypeSelect();" class="indent">
-							<radio value="CARDDAV" label="&locationNetworkPage.carddav.label;" selected="true"/>
-							<radio value="GOOGLE" label="&locationNetworkPage.google.label;"/>
-							<radio value="APPLE" label="&locationNetworkPage.apple.label;"/>
+						<radiogroup id="remotePageType" onselect="wdw_addressbooksAdd.remotePageTypeSelect();" class="indent">
+							<radio value="CARDDAV" label="&remotePage.carddav.label;" selected="true"/>
+							<radio value="GOOGLE" label="&remotePage.google.label;"/>
+							<radio value="APPLE" label="&remotePage.apple.label;"/>
 						</radiogroup>
 					</row>
 				</rows>
 			</grid>
 		</groupbox>
 
-		<groupbox flex="1" id="locationNetworkPageUriGroupbox">
-			<caption label="&locationNetworkPage.connection.label;"/>
+		<groupbox flex="1" id="remotePageUriGroupbox">
+			<caption label="&remotePage.connection.label;"/>
 			<grid flex="1">
 				<columns>
 					<column/>
@@ -147,28 +148,28 @@
 					<column flex="1"/>
 				</columns>
 				<rows>
-					<description>&locationNetworkPage.uri.description;</description>
+					<description>&remotePage.uri.description;</description>
 					<row align="center">
-						<label id="locationNetworkPageUriLabel" value="&locationNetworkPage.uri.label;" control="locationNetworkPageURI"/>
-						<textbox id="locationNetworkPageURI"
+						<label id="remotePageUriLabel" value="&remotePage.uri.label;" control="remotePageURI"/>
+						<textbox id="remotePageURI"
 							required="true"
-							oninput="wdw_addressbooksAdd.locationNetworkPageTextboxInput();"/>
+							oninput="wdw_addressbooksAdd.remotePageTextboxInput();"/>
 					</row>
 					<separator class="groove-thin"/>
-					<description>&locationNetworkPage.credentials.description;</description>
+					<description>&remotePage.credentials.description;</description>
 					<row align="center">
-						<label value="&usernameLabel;" control="locationNetworkPageUsername"/>
-						<textbox id="locationNetworkPageUsername"
+						<label value="&usernameLabel;" control="remotePageUsername"/>
+						<textbox id="remotePageUsername"
 							required="true"
-							oninput="wdw_addressbooksAdd.locationNetworkPageTextboxInput();"/>
+							oninput="wdw_addressbooksAdd.remotePageTextboxInput();"/>
 					</row>
 					<row align="center">
-						<label id="locationNetworkPagePasswordLabel" value="&passwordLabel;" control="locationNetworkPagePassword"/>
-						<textbox id="locationNetworkPagePassword"
+						<label id="remotePagePasswordLabel" value="&passwordLabel;" control="remotePagePassword"/>
+						<textbox id="remotePagePassword"
 							type="password"
 							required="true"
-							oninput="wdw_addressbooksAdd.locationNetworkPageTextboxInput();"/>
-						<checkbox id="locationNetworkPagePasswordCheckBox" label="&passwordShowLabel;" oncommand="wdw_addressbooksAdd.showPassword();" disabled="false"/>
+							oninput="wdw_addressbooksAdd.remotePageTextboxInput();"/>
+						<checkbox id="passwordCheckBox" label="&passwordShowLabel;" oncommand="wdw_addressbooksAdd.showPassword();" disabled="false"/>
 					</row>
 				</rows>
 			</grid>
@@ -176,7 +177,7 @@
 			<hbox>
 				<spacer flex="1"/>
 				<textbox id="resultValidation" flex="1" hidden="true" disabled="true"/>
-				<button id="validateButton" label="&locationNetworkPage.validatebutton.label;" oncommand="wdw_addressbooksAdd.validateURL();"/>
+				<button id="validateButton" label="&remotePage.validatebutton.label;" oncommand="wdw_addressbooksAdd.validateURL();"/>
 			</hbox>
 		</groupbox>
 	</wizardpage>
@@ -311,7 +312,7 @@
 	<wizardpage pageid="locationFirstPage"
 			next="finishPage"
 			label="&wizard.label;"
-			description="&locationComputerPage.wizard.description;"
+			description="&localPage.wizard.description;"
 			onpageshow="wdw_addressbooksAdd.checkRequired();"
 			onpageadvanced="wdw_addressbooksAdd.locationFirstAdvance();">
 		<description>&locationFirstPage.uri.description;</description>
@@ -326,7 +327,7 @@
 						required="true"
 						disabled="true"
 						oninput="wdw_addressbooksAdd.checkRequired();"/>
-					<button id="locationFirstPageURIButton" label="&locationComputerPage.uributton.label;" oncommand="wdw_addressbooksAdd.searchFile(this);"/>
+					<button id="locationFirstPageURIButton" label="&localPage.uributton.label;" oncommand="wdw_addressbooksAdd.searchFile(this);"/>
 				</row>
 			</rows>
 		</grid>

@@ -4,36 +4,37 @@
 <!ENTITY welcomePage.wizard.description "Willkommen">
 <!ENTITY welcomePage.description "Anscheinend verwenden Sie Cardbook zum ersten Mal. Deshalb werden die Kontakte aus den Standard Adressbüchern von Thunderbird in die Adressbücher von Cardbook importiert.">
 
-<!ENTITY initialpage.wizard.description "Ort des neuen Adressbuchs">
-<!ENTITY initialpage.description "Ist das Adressbuch lokal oder im Netzwerk gespeichert?">
-<!ENTITY initialpage.computer.label "Lokal">
-<!ENTITY initialpage.network.label "Im Netzwerk">
-<!ENTITY initialpage.search.label "Suche in einem existierenden Adressbuch">
+<!ENTITY initialPage.wizard.description "Ort des neuen Adressbuchs">
+<!ENTITY initialPage.description "Ist das Adressbuch lokal oder im Netzwerk gespeichert?">
+<!ENTITY initialPage.computer.label "Lokal">
+<!ENTITY initialPage.network.label "Im Netzwerk">
+<!ENTITY initialPage.standard.label "Standard Adressbücher von Thunderbird importieren">
+<!ENTITY initialPage.search.label "Suche in einem existierenden Adressbuch">
 
-<!ENTITY locationComputerPage.wizard.description "Art und Ort des neuen lokalen Adressbuchs.">
-<!ENTITY locationComputerPage.type.description "Welcher Art ist das lokale Adressbuch?">
-<!ENTITY locationComputerPage.type.label "Art">
-<!ENTITY locationComputerPage.createDirectory.label "Neues Adressbuch erstellen (Verzeichnis)">
-<!ENTITY locationComputerPage.createFile.label "Neues Adressbuch erstellen (Datei)">
-<!ENTITY locationComputerPage.openDirectory.label "Existierendes Adressbuch öffnen (Verzeichnis)">
-<!ENTITY locationComputerPage.openFile.label "Existierendes Adressbuch öffnen (Datei)">
-<!ENTITY locationComputerPage.standard.label "Standard Adressbücher von Thunderbird importieren (Verzeichnis)">
-<!ENTITY locationComputerPage.uri.label "Verzeichnis oder Datei">
-<!ENTITY locationComputerPage.uri.description "Wählen Sie den Speicherort für das neue lokale Adressbuch. Falls Sie eine neue Datei erstellen, sollten Sie .vcf als Dateiendung verwenden.">
+<!ENTITY localPage.wizard.description "Art und Ort des neuen lokalen Adressbuchs.">
+<!ENTITY localPage.type.description "Welcher Art ist das lokale Adressbuch?">
+<!ENTITY localPage.type.label "Art">
+<!ENTITY localPage.createDB.label "Neues Adressbuch erstellen">
+<!ENTITY localPage.createDirectory.label "Neues Adressbuch erstellen (Verzeichnis)">
+<!ENTITY localPage.createFile.label "Neues Adressbuch erstellen (Datei)">
+<!ENTITY localPage.openDirectory.label "Existierendes Adressbuch öffnen (Verzeichnis)">
+<!ENTITY localPage.openFile.label "Existierendes Adressbuch öffnen (Datei)">
+<!ENTITY localPage.uri.label "Verzeichnis oder Datei">
+<!ENTITY localPage.uri.description "Wählen Sie den Speicherort für das neue lokale Adressbuch. Falls Sie eine neue Datei erstellen, sollten Sie .vcf als Dateiendung verwenden.">
 <!ENTITY locationFirstPage.uri.description "Wählen Sie das Verzeichnis für die neuen lokalen Adressbücher.">
-<!ENTITY locationComputerPage.uributton.label "Durchsuchen">
+<!ENTITY localPage.uributton.label "Durchsuchen">
 
-<!ENTITY locationNetworkPage.wizard.description "Art und Ort des neuen Netzwerk-Adressbuchs">
-<!ENTITY locationNetworkPage.description "Welcher Art ist das Netzwerk-Adressbuch? (Achtung: Google hält sich nicht an vCard-Standards.)">
-<!ENTITY locationNetworkPage.type.label "Art">
-<!ENTITY locationNetworkPage.carddav.label "CardDAV">
-<!ENTITY locationNetworkPage.google.label "Google">
-<!ENTITY locationNetworkPage.apple.label "Apple">
-<!ENTITY locationNetworkPage.connection.label "Verbindung">
-<!ENTITY locationNetworkPage.uri.description "Adresse für das CardDAV-Adressbuch. Sie können versuchen, Teil-URLs anzugeben (z.B. http(s)://carddav.example.org). Für Google-Adressbücher muss keine URL angegeben werden.">
-<!ENTITY locationNetworkPage.uri.label "URL">
-<!ENTITY locationNetworkPage.credentials.description "Zugangsdaten für das Adressbuch. Für Google-Adressbücher sollte der Benutzername der Email-Adresse entsprechen.">
-<!ENTITY locationNetworkPage.validatebutton.label "Überprüfen">
+<!ENTITY remotePage.wizard.description "Art und Ort des neuen Netzwerk-Adressbuchs">
+<!ENTITY remotePage.description "Welcher Art ist das Netzwerk-Adressbuch? (Achtung: Google hält sich nicht an vCard-Standards.)">
+<!ENTITY remotePage.type.label "Art">
+<!ENTITY remotePage.carddav.label "CardDAV">
+<!ENTITY remotePage.google.label "Google">
+<!ENTITY remotePage.apple.label "Apple">
+<!ENTITY remotePage.connection.label "Verbindung">
+<!ENTITY remotePage.uri.description "Adresse für das CardDAV-Adressbuch. Sie können versuchen, Teil-URLs anzugeben (z.B. http(s)://carddav.example.org). Für Google-Adressbücher muss keine URL angegeben werden.">
+<!ENTITY remotePage.uri.label "URL">
+<!ENTITY remotePage.credentials.description "Zugangsdaten für das Adressbuch. Für Google-Adressbücher sollte der Benutzername der Email-Adresse entsprechen.">
+<!ENTITY remotePage.validatebutton.label "Überprüfen">
 
 <!ENTITY locationSearchPage.wizard.description "Die erweiterte Suche definieren.">
 <!ENTITY locationSearchPage.label "Erweiterte Suche">

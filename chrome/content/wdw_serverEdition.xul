@@ -41,12 +41,12 @@
 					</row>
 					<separator class="thin"/>
 					<row align="center">
-						<label id="serverTypeLabel" value="&locationNetworkPage.type.label;" control="serverTypeTextBox"/>
+						<label id="serverTypeLabel" value="&remotePage.type.label;" control="serverTypeTextBox"/>
 						<textbox id="serverTypeTextBox" disabled="true"/>
 					</row>
 					<separator class="thin"/>
 					<row align="center">
-						<label id="serverUrlLabel" value="&locationNetworkPage.uri.label;" control="serverUrlTextBox"/>
+						<label id="serverUrlLabel" value="&remotePage.uri.label;" control="serverUrlTextBox"/>
 						<textbox id="serverUrlTextBox" disabled="true"/>
 					</row>
 					<separator class="thin"/>

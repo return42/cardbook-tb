@@ -57,6 +57,8 @@ if ("undefined" == typeof(cardbookObserver)) {
 			observerService.addObserver(this, "cardbook.cardPasted", false);
 			observerService.addObserver(this, "cardbook.cardDragged", false);
 			observerService.addObserver(this, "cardbook.cardImportedFromFile", false);
+
+			observerService.addObserver(this, "cardbook.DBOpen", false);
 		},
 		
 		unregister: function() {
@@ -83,6 +85,8 @@ if ("undefined" == typeof(cardbookObserver)) {
 			observerService.removeObserver(this, "cardbook.cardPasted");
 			observerService.removeObserver(this, "cardbook.cardDragged");
 			observerService.removeObserver(this, "cardbook.cardImportedFromFile");
+
+			observerService.removeObserver(this, "cardbook.DBOpen");
 		},
 		
 		observe: function(aSubject, aTopic, aData) {
@@ -110,6 +114,13 @@ if ("undefined" == typeof(cardbookObserver)) {
 				case "cardbook.cardAddedDirect":
 				case "cardbook.cardModifiedDirect":
 					wdw_cardbook.refreshWindow(aData);
+					break;
+				case "cardbook.DBOpen":
+					cardbookSynchronization.loadAccounts();
+					if (wdw_cardbook) {
+						wdw_cardbook.loadCssRules();
+						wdw_cardbook.refreshWindow("accountid:0");
+					}
 					break;
 			}
 		}

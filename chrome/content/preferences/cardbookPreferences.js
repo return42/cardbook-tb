@@ -600,7 +600,7 @@ cardbookPreferenceService.prototype = {
     getUrl: function () {
         let url = this._getPref("url");
         let type = this._getPref("type");
-        if (type !== "FILE" && type !== "CACHE" && type !== "DIRECTORY" && type !== "SEARCH") {
+        if (type !== "FILE" && type !== "CACHE" && type !== "DIRECTORY" && type !== "SEARCH" && type !== "LOCALDB") {
 			if (url) {
 				if (url[url.length - 1] != '/') {
 					url += '/';
@@ -676,7 +676,15 @@ cardbookPreferenceService.prototype = {
         this._setPref("color", color);
     },
 
-   getVCard: function () {
+    getDBCached: function () {
+        return this._getBoolPref("DBcached", false);
+    },
+
+    setDBCached: function (DBcached) {
+        this._setBoolPref("DBcached", DBcached);
+    },
+
+    getVCard: function () {
         let vCard = this._getPref("vCard");
         if (vCard != null && vCard !== undefined && vCard != "") {
         	return vCard;

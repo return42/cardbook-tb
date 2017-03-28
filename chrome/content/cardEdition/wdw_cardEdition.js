@@ -364,10 +364,14 @@ if ("undefined" == typeof(wdw_cardEdition)) {
 		},
 
 		loadDefaultVersion: function () {
-			var myDirPrefId = document.getElementById('addressbookMenulist').selectedItem.value;
-			var cardbookPrefService = new cardbookPreferenceService(myDirPrefId);
-			document.getElementById("versionTextBox").value = cardbookPrefService.getVCard();
-			wdw_cardEdition.workingCard.version = document.getElementById("versionTextBox").value;
+			if (wdw_cardEdition.workingCard.version == "") {
+				var myDirPrefId = document.getElementById('addressbookMenulist').selectedItem.value;
+				var cardbookPrefService = new cardbookPreferenceService(myDirPrefId);
+				document.getElementById("versionTextBox").value = cardbookPrefService.getVCard();
+				wdw_cardEdition.workingCard.version = document.getElementById("versionTextBox").value;
+			} else {
+				document.getElementById("versionTextBox").value = wdw_cardEdition.workingCard.version;
+			}
 		},
 
 		removeContacts: function () {

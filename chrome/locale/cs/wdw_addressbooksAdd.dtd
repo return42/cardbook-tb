@@ -4,36 +4,37 @@
 <!ENTITY welcomePage.wizard.description "Vítejte">
 <!ENTITY welcomePage.description "Vypadá to, že používáte CardBook poprvé, takže bude proveden pokus o import kontaktů z adresářů Thunderbirdu do CardBooku.">
 
-<!ENTITY initialpage.wizard.description "Umístění nového adresáře.">
-<!ENTITY initialpage.description "Je váš adresář místní nebo vzdálený ? :">
-<!ENTITY initialpage.computer.label "Místní">
-<!ENTITY initialpage.network.label "Vzdálený">
-<!ENTITY initialpage.search.label "Vyhledávání do existujících adresářů">
+<!ENTITY initialPage.wizard.description "Umístění nového adresáře.">
+<!ENTITY initialPage.description "Je váš adresář místní nebo vzdálený ? :">
+<!ENTITY initialPage.computer.label "Místní">
+<!ENTITY initialPage.network.label "Vzdálený">
+<!ENTITY initialPage.standard.label "Importovat standardní adresáře Thunderbirdu">
+<!ENTITY initialPage.search.label "Vyhledávání do existujících adresářů">
 
-<!ENTITY locationComputerPage.wizard.description "Typ a umístění nového místního adresáře.">
-<!ENTITY locationComputerPage.type.description "Jaký je typ vašeho místního adresáře ? :">
-<!ENTITY locationComputerPage.type.label "Typ">
-<!ENTITY locationComputerPage.createDirectory.label "Vytvořit nový adresář (složka)">
-<!ENTITY locationComputerPage.createFile.label "Vytvořit nový adresář (soubor)">
-<!ENTITY locationComputerPage.openDirectory.label "Otevřít existující adresář (složka)">
-<!ENTITY locationComputerPage.openFile.label "Otevřít existující adresář (soubor)">
-<!ENTITY locationComputerPage.standard.label "Importovat standardní adresáře Thunderbirdu (adresář)">
-<!ENTITY locationComputerPage.uri.label "Adresář nebo soubor">
-<!ENTITY locationComputerPage.uri.description "S použitím prohlížeče zvolte umístění pro váš nový místní adresář. Pokud vytváříte nový soubor, jako příponu zadejte .vcf.">
+<!ENTITY localPage.wizard.description "Typ a umístění nového místního adresáře.">
+<!ENTITY localPage.type.description "Jaký je typ vašeho místního adresáře ? :">
+<!ENTITY localPage.type.label "Typ">
+<!ENTITY localPage.createDB.label "Vytvořit nový adresář">
+<!ENTITY localPage.createDirectory.label "Vytvořit nový adresář (složka)">
+<!ENTITY localPage.createFile.label "Vytvořit nový adresář (soubor)">
+<!ENTITY localPage.openDirectory.label "Otevřít existující adresář (složka)">
+<!ENTITY localPage.openFile.label "Otevřít existující adresář (soubor)">
+<!ENTITY localPage.uri.label "Adresář nebo soubor">
+<!ENTITY localPage.uri.description "S použitím prohlížeče zvolte umístění pro váš nový místní adresář. Pokud vytváříte nový soubor, jako příponu zadejte .vcf.">
 <!ENTITY locationFirstPage.uri.description "Zvolte umístění pro vaše nové místní adresáře.">
-<!ENTITY locationComputerPage.uributton.label "Procházet">
+<!ENTITY localPage.uributton.label "Procházet">
 
-<!ENTITY locationNetworkPage.wizard.description "Typ a umístění nového vzdáleného adresáře.">
-<!ENTITY locationNetworkPage.description "Jaký je typ vašeho vzdáleného adresáře ? : (Upozornění: Google nerespektuje vCard standardy)">
-<!ENTITY locationNetworkPage.type.label "Typ">
-<!ENTITY locationNetworkPage.carddav.label "CardDAV">
-<!ENTITY locationNetworkPage.google.label "Google">
-<!ENTITY locationNetworkPage.apple.label "Apple">
-<!ENTITY locationNetworkPage.connection.label "Připojení">
-<!ENTITY locationNetworkPage.uri.description "Pro adresář CardDAV zadejte URL vašeho vzdáleného adresáře. Můžete zkusit částečnou URL (příklad : http(s)://carddav.example.org). Pro Google adresář toto pole nevyplňujte">
-<!ENTITY locationNetworkPage.uri.label "URL">
-<!ENTITY locationNetworkPage.credentials.description "Zadejte přihlašovací údaje pro přístup k vašemu vzdálenému adresáři. Pro Google adresář by mělo být uživatelské jméno váš Google e-mail.">
-<!ENTITY locationNetworkPage.validatebutton.label "Ověřit">
+<!ENTITY remotePage.wizard.description "Typ a umístění nového vzdáleného adresáře.">
+<!ENTITY remotePage.description "Jaký je typ vašeho vzdáleného adresáře ? : (Upozornění: Google nerespektuje vCard standardy)">
+<!ENTITY remotePage.type.label "Typ">
+<!ENTITY remotePage.carddav.label "CardDAV">
+<!ENTITY remotePage.google.label "Google">
+<!ENTITY remotePage.apple.label "Apple">
+<!ENTITY remotePage.connection.label "Připojení">
+<!ENTITY remotePage.uri.description "Pro adresář CardDAV zadejte URL vašeho vzdáleného adresáře. Můžete zkusit částečnou URL (příklad : http(s)://carddav.example.org). Pro Google adresář toto pole nevyplňujte">
+<!ENTITY remotePage.uri.label "URL">
+<!ENTITY remotePage.credentials.description "Zadejte přihlašovací údaje pro přístup k vašemu vzdálenému adresáři. Pro Google adresář by mělo být uživatelské jméno váš Google e-mail.">
+<!ENTITY remotePage.validatebutton.label "Ověřit">
 
 <!ENTITY locationSearchPage.wizard.description "Definice pokročilého vyhledávání.">
 <!ENTITY locationSearchPage.label "Pokročilé vyhledávání">

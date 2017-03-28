@@ -4,9 +4,9 @@ if ("undefined" == typeof(wdw_migrate)) {
 		translateStandardCards: function (aDirPrefIdTarget, aDirPrefIdTargetName, aABCard, aMode) {
 			try {
 				var myCard = new cardbookCardParser();
-				myCard.uid = cardbookUtils.getCardUUID(aDirPrefIdTarget);
-				myCard.version = "3.0";
 				myCard.dirPrefId = aDirPrefIdTarget;
+				cardbookUtils.setCardUUID(myCard);
+				myCard.version = "3.0";
 				var myMap = [ ["FirstName", "firstname"], ["LastName", "lastname"], ["DisplayName", "fn"], ["NickName", "nickname"], ["JobTitle", "title"], ["Notes", "note"] ];
 				for (var i = 0; i < myMap.length; i++) {
 					var myMapData = aABCard.getProperty(myMap[i][0],"");
@@ -96,7 +96,7 @@ if ("undefined" == typeof(wdw_migrate)) {
 				wdw_migrate.getNotNullFn(myCard, aABCard);
 				
 				cardbookUtils.setCalculatedFields(myCard);
-				cardbookRepository.addCardToRepository(myCard, aMode, cardbookUtils.getFileCacheNameFromCard(myCard, "DIRECTORY"));
+				cardbookRepository.addCardToRepository(myCard, aMode);
 				cardbookUtils.formatStringForOutput("cardCreatedOK", [aDirPrefIdTargetName, myCard.fn]);
 				wdw_cardbooklog.addActivity("cardCreatedOK", [aDirPrefIdTargetName, myCard.fn], "addItem");
 
@@ -118,9 +118,9 @@ if ("undefined" == typeof(wdw_migrate)) {
 		translateStandardLists: function (aDirPrefIdTarget, aDirPrefIdTargetName, aABList, aMode) {
 			try {
 				var myCard = new cardbookCardParser();
-				myCard.uid = cardbookUtils.getCardUUID(aDirPrefIdTarget);
-				myCard.version = "3.0";
 				myCard.dirPrefId = aDirPrefIdTarget;
+				cardbookUtils.setCardUUID(myCard);
+				myCard.version = "3.0";
 				var myMap = [ ["dirName", "fn"], ["listNickName", "nickname"], ["description", "note"] ];
 				for (var i = 0; i < myMap.length; i++) {
 					myCard[myMap[i][1]] = aABList[myMap[i][0]];
@@ -140,7 +140,7 @@ if ("undefined" == typeof(wdw_migrate)) {
 				cardbookUtils.parseLists(myCard, myTargetMembers, "group");
 
 				cardbookUtils.setCalculatedFields(myCard);
-				cardbookRepository.addCardToRepository(myCard, aMode, cardbookUtils.getFileCacheNameFromCard(myCard, "DIRECTORY"));
+				cardbookRepository.addCardToRepository(myCard, aMode);
 				cardbookUtils.formatStringForOutput("cardCreatedOK", [aDirPrefIdTargetName, myCard.fn]);
 				wdw_cardbooklog.addActivity("cardCreatedOK", [aDirPrefIdTargetName, myCard.fn], "addItem");
 				cardbookRepository.cardbookServerSyncDone[aDirPrefIdTarget]++;

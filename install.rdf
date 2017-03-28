@@ -6,7 +6,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>cardbook@vigneau.philippe</em:id>
 		<em:name>CardBook</em:name>
-		<em:version>17.1</em:version>
+		<em:version>17.2</em:version>
 		<em:type>2</em:type>
 		<em:description>vCard Addressbook</em:description>
 		<em:creator>Philippe VIGNEAU</em:creator>

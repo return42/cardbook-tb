@@ -10,11 +10,20 @@ if ("undefined" == typeof(ovl_synchro)) {
 			var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 			cardbookRepository.preferEmailPref = prefs.getBoolPref("extensions.cardbook.preferEmailPref");
 
+			// migration functions (should be removed)
 			cardbookRepository.setSolveConflicts();
 			cardbookRepository.setTypes();
 			cardbookRepository.loadCustoms();
-			cardbookSynchronization.loadAccounts();
-		}
+			
+			// observers are needed not only UI but also for synchro
+			// there is no unregister launched
+			cardBookPrefObserver.register();
+			cardbookObserver.register();
+			
+			// once openDB is finished, it will fire an event
+			// and then load the cache and maybe sync the accounts
+			cardbookIndexedDB.openDB();
+			}
 		},
 		
 		runBackgroundSync: function () {
@@ -24,6 +33,7 @@ if ("undefined" == typeof(ovl_synchro)) {
 
 	};
 
+	// need to launch it a bit later
 	ovl_synchro.runBackgroundSync();
 
 };

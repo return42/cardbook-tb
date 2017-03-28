@@ -37,7 +37,6 @@
 		defaultmode="full"
 		labelalign="end"
 		defaultlabelalign="end">
-		<menubar id="mail-menubar"/>
 		<toolbarpalette id="CardBookToolbarPalette">
 			<toolbarbutton id="cardbookToolbarAddServerButton"
 				label="&cardbookToolbarAddServerButtonLabel;"
@@ -173,7 +172,7 @@
 				label="&cardbookToolbarThMenuButtonLabel;"
 				tooltiptext="&cardbookToolbarThMenuButtonTooltip;"/>
  		</toolbarpalette>
-		
+
 		<toolbar id="cardbook-toolbar" class="inline-toolbar chromeclass-toolbar"
 			toolbarname="&cardbookToolbarLabel;"
 			accesskey="&cardbookToolbarAccesskey;"

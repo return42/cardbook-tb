@@ -4,8 +4,6 @@ if ("undefined" == typeof(cardbookTabType)) {
 		onTabTitleChanged: function() {},
 		onTabOpened: function(aTab) {
 			if (aTab.mode.name == "cardbook") {
-				cardBookPrefObserver.register();
-				cardbookObserver.register();
 				wdw_cardbook.loadFirstWindow();
 			}
 		},
@@ -13,8 +11,6 @@ if ("undefined" == typeof(cardbookTabType)) {
 			if (aTab.mode.name == "cardbook") {
 				document.getElementById("cardboookModeBroadcaster").setAttribute("mode", "mail");
 				document.getElementById("unreadMessageCount").hidden=false;
-				cardBookPrefObserver.unregister();
-				cardbookObserver.unregister();
 			}
 		},
 		onTabPersist: function() {},

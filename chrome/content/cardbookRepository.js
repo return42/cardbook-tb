@@ -1,6 +1,10 @@
 var EXPORTED_SYMBOLS = ["cardbookRepository"];
 
 var cardbookRepository = {
+	cardbookDatabase : {},
+	cardbookDatabaseVersion : "5",
+	cardbookDatabaseName : "CardBook",
+	
 	LIGHTNING_ID : "{e2fda1a4-762b-4020-b5ad-a41df1933103}",
 	
 	allColumns : { "display": ["fn"],
@@ -34,6 +38,8 @@ var cardbookRepository = {
 	cardbookDirResponse : {},
 	cardbookFileRequest : {},
 	cardbookFileResponse : {},
+	cardbookDBRequest : {},
+	cardbookDBResponse : {},
 
 	cardbookServerValidation : {},
 
@@ -391,7 +397,7 @@ var cardbookRepository = {
 		}
 	},
 	
-	addAccountToRepository: function(aAccountId, aAccountName, aAccountType, aAccountUrl, aAccountUser, aColor, aEnabled, aExpanded, aVCard, aReadOnly, aDateFormat, aUrnuuid, aPrefInsertion) {
+	addAccountToRepository: function(aAccountId, aAccountName, aAccountType, aAccountUrl, aAccountUser, aColor, aEnabled, aExpanded, aVCard, aReadOnly, aDateFormat, aUrnuuid, aDBcached, aPrefInsertion) {
 		var cacheDir = cardbookRepository.getLocalDirectory();
 		cacheDir.append(aAccountId);
 		if (!cacheDir.exists() || !cacheDir.isDirectory()) {
@@ -413,6 +419,7 @@ var cardbookRepository = {
 			cardbookPrefService.setReadOnly(aReadOnly);
 			cardbookPrefService.setDateFormat(aDateFormat);
 			cardbookPrefService.setUrnuuid(aUrnuuid);
+			cardbookPrefService.setDBCached(aDBcached);
 		}
 		
 		cardbookRepository.cardbookAccounts.push([aAccountName, true, aExpanded, true, aAccountId, aEnabled, aAccountType, aReadOnly]);
@@ -452,7 +459,7 @@ var cardbookRepository = {
 					cardbookRepository.removeCardFromSearch(cardbookRepository.cardbookCards[key]);
 					cardbookRepository.removeCardFromDisplay(cardbookRepository.cardbookCards[key]);
 					if (cardbookRepository.cardbookCards[key].cacheuri != "") {
-						delete cardbookRepository.cardbookFileCacheCards[cardbookRepository.cardbookCards[key].cacheuri];
+						delete cardbookRepository.cardbookFileCacheCards[cardbookRepository.cardbookCards[key].cacheuri+"::"+aAccountId];
 					}
 					delete cardbookRepository.cardbookCards[key];
 				}
@@ -480,7 +487,7 @@ var cardbookRepository = {
 				if (key.indexOf(aAccountId) >= 0) {
 					cardbookRepository.removeCardFromSearch(cardbookRepository.cardbookCards[key]);
 					if (cardbookRepository.cardbookCards[key].cacheuri != "") {
-						delete cardbookRepository.cardbookFileCacheCards[cardbookRepository.cardbookCards[key].cacheuri];
+						delete cardbookRepository.cardbookFileCacheCards[cardbookRepository.cardbookCards[key].cacheuri+"::"+aAccountId];
 					}
 					delete cardbookRepository.cardbookCards[key];
 				}
@@ -589,9 +596,17 @@ var cardbookRepository = {
 					cardbookSynchronization.writeCardsToFile(myFile.path, [aCard], true);
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " written to directory");
 				}
+			} else if (myDirPrefIdType === "FILE" || myDirPrefIdType === "SEARCH") {
+				return;
+			} else if (myDirPrefIdType === "GOOGLE" || myDirPrefIdType === "APPLE" || myDirPrefIdType === "CARDDAV" || myDirPrefIdType === "LOCALDB") {
 				aCard.cacheuri = aFileName;
-				cardbookRepository.cardbookFileCacheCards[aFileName] = aCard;
-			} else if (aFileName != null && aFileName !== undefined && aFileName != "") {
+				cardbookRepository.cardbookFileCacheCards[aFileName+"::"+aCard.dirPrefId] = aCard;
+				if (aMode === "INITIAL") {
+					cardbookIndexedDB.addItemIfMissing(myDirPrefIdName, aCard);
+				} else {
+					cardbookIndexedDB.addItem(myDirPrefIdName, aCard);
+				}
+			} else if (myDirPrefIdType === "CACHE") {
 				var myFile = cardbookRepository.getLocalDirectory();
 				myFile.append(aCard.dirPrefId);
 				myFile.append(aFileName);
@@ -608,7 +623,7 @@ var cardbookRepository = {
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " written to cache");
 				}
 				aCard.cacheuri = aFileName;
-				cardbookRepository.cardbookFileCacheCards[aFileName] = aCard;
+				cardbookRepository.cardbookFileCacheCards[aFileName+"::"+aCard.dirPrefId] = aCard;
 			}
 		}
 		catch(e) {
@@ -631,19 +646,23 @@ var cardbookRepository = {
 				if (myFile.exists() && myFile.isFile()) {
 					myFile.remove(true);
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " deleted from directory");
-					if (cardbookRepository.cardbookFileCacheCards[aCard.cacheuri]) {
-						delete cardbookRepository.cardbookFileCacheCards[aCard.cacheuri];
+					if (cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId]) {
+						delete cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId];
 					}
 				}
-			} else {
+			} else if (myDirPrefIdType === "FILE" || myDirPrefIdType === "SEARCH") {
+				return;
+			} else if (myDirPrefIdType === "GOOGLE" || myDirPrefIdType === "APPLE" || myDirPrefIdType === "CARDDAV" || myDirPrefIdType === "LOCALDB") {
+				cardbookIndexedDB.removeItem(myDirPrefIdName, aCard);
+			} else if (myDirPrefIdType === "CACHE") {
 				var myFile = cardbookRepository.getLocalDirectory();
 				myFile.append(aCard.dirPrefId);
 				myFile.append(aCard.cacheuri);
 				if (myFile.exists() && myFile.isFile()) {
 					myFile.remove(true);
 					wdw_cardbooklog.updateStatusProgressInformationWithDebug2(myDirPrefIdName + " : debug mode : Contact " + aCard.fn + " deleted from cache");
-					if (cardbookRepository.cardbookFileCacheCards[aCard.cacheuri]) {
-						delete cardbookRepository.cardbookFileCacheCards[aCard.cacheuri];
+					if (cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId]) {
+						delete cardbookRepository.cardbookFileCacheCards[aCard.cacheuri+"::"+aCard.dirPrefId];
 					}
 				}
 			}
@@ -878,8 +897,8 @@ var cardbookRepository = {
 		var myDirPrefIdReadOnly = cardbookPrefService.getReadOnly();
 		if (!myDirPrefIdReadOnly) {
 			var myNewCard = new cardbookCardParser();
-			myNewCard.uid = cardbookUtils.getCardUUID(aDirPrefId);
 			myNewCard.dirPrefId = aDirPrefId;
+			cardbookUtils.setCardUUID(myNewCard);
 			myNewCard.fn = aDisplayName;
 			if (myNewCard.fn == "") {
 				myNewCard.fn = aEmail.substr(0, aEmail.indexOf("@")).replace("."," ").replace("_"," ");
@@ -1000,7 +1019,7 @@ var cardbookRepository = {
 			// Existing card
 			if (cardbookRepository.cardbookCards[aOldCard.dirPrefId+"::"+aNewCard.uid] && aOldCard.dirPrefId == aNewCard.dirPrefId) {
 				var myCard = cardbookRepository.cardbookCards[aOldCard.dirPrefId+"::"+aNewCard.uid];
-				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY") {
+				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 					// if aOldCard and aNewCard have the same cached medias
 					cardbookUtils.changeMediaFromFileToContent(aNewCard);
 					cardbookRepository.removeCardFromRepository(myCard, true);
@@ -1033,7 +1052,7 @@ var cardbookRepository = {
 				var myDirPrefIdType = cardbookPrefService.getType();
 				if (myDirPrefIdType === "FILE") {
 					cardbookRepository.removeCardFromRepository(myCard, false);
-				} else if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY") {
+				} else if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 					cardbookRepository.removeCardFromRepository(myCard, true);
 				} else {
 					if (cardbookUtils.searchTagCreated(myCard)) {
@@ -1052,8 +1071,8 @@ var cardbookRepository = {
 				var myDirPrefIdName = cardbookPrefService.getName();
 				var myDirPrefIdType = cardbookPrefService.getType();
 				aNewCard.cardurl = "";
-				aNewCard.uid = cardbookUtils.getCardUUID(aNewCard.dirPrefId);
-				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY") {
+				cardbookUtils.setCardUUID(aNewCard);
+				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 					cardbookUtils.nullifyTagModification(aNewCard);
 					cardbookUtils.nullifyEtag(aNewCard);
 					cardbookRepository.addCardToRepository(aNewCard, "WINDOW", cardbookUtils.getFileCacheNameFromCard(aNewCard, myDirPrefIdType));
@@ -1071,9 +1090,8 @@ var cardbookRepository = {
 				cardbookUtils.notifyObservers(aSource, "cardid:" + aNewCard.dirPrefId + "::" + aNewCard.uid);
 			// New card
 			} else {
-				aNewCard.uid = cardbookUtils.getCardUUID(aNewCard.dirPrefId);
-				Components.utils.import("chrome://cardbook/content/cardbookRepository.js");
-				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY") {
+				cardbookUtils.setCardUUID(aNewCard);
+				if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 					cardbookUtils.nullifyTagModification(aNewCard);
 					cardbookUtils.nullifyEtag(aNewCard);
 					cardbookRepository.addCardToRepository(aNewCard, "WINDOW", cardbookUtils.getFileCacheNameFromCard(aNewCard, myDirPrefIdType));
@@ -1113,7 +1131,7 @@ var cardbookRepository = {
 					if (myDirPrefIdType === "FILE") {
 						cardbookRepository.removeCardFromRepository(aListOfCards[i], false);
 						listOfFileToRewrite.push(aListOfCards[i].dirPrefId);
-					} else if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY") {
+					} else if (myDirPrefIdType === "CACHE" || myDirPrefIdType === "DIRECTORY" || myDirPrefIdType === "LOCALDB") {
 						cardbookRepository.removeCardFromRepository(aListOfCards[i], true);
 					} else {
 						if (cardbookUtils.searchTagCreated(aListOfCards[i])) {
@@ -1223,6 +1241,7 @@ var cardbookRepository = {
 			case "CACHE":
 			case "DIRECTORY":
 			case "FILE":
+			case "LOCALDB":
 				return "local";
 				break;
 			case "APPLE":
@@ -1242,6 +1261,7 @@ var cardbookRepository = {
 cardbookRepository.jsInclude(["chrome://cardbook/content/preferences/cardbookPreferences.js"]);
 cardbookRepository.jsInclude(["chrome://cardbook/content/wdw_log.js"]);
 cardbookRepository.jsInclude(["chrome://cardbook/content/cardbookUtils.js"]);
+cardbookRepository.jsInclude(["chrome://cardbook/content/cardbookIndexedDB.js"]);
 cardbookRepository.jsInclude(["chrome://cardbook/content/cardbookSynchronization.js"]);
 cardbookRepository.jsInclude(["chrome://cardbook/content/complexSearch/cardbookComplexSearch.js"]);
 
